@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.widdy.begin.Begin;
+import com.example.widdy.profile.Profile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -24,7 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Profile extends AppCompatActivity {
+public class LogIn extends AppCompatActivity {
 
     private ImageView backBtn;
     private TextInputEditText login_email, login_password;
@@ -37,7 +38,7 @@ public class Profile extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Profile.this, Begin.class);
+        Intent intent = new Intent(LogIn.this, Begin.class);
         startActivity(intent);
         finish();
     }
@@ -52,7 +53,7 @@ public class Profile extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Profile.this, Begin.class);
+                Intent intent = new Intent(LogIn.this, Begin.class);
                 startActivity(intent);
                 finish();
             }
@@ -69,8 +70,8 @@ public class Profile extends AppCompatActivity {
         login_email.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                login_email.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4B4B4")));
-                login_password.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#505050")));
+                login_email.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#505050")));
+                login_password.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#323232")));
                 login_emailLayout.setErrorEnabled(false);
                 return false;
             }
@@ -79,8 +80,8 @@ public class Profile extends AppCompatActivity {
         login_password.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                login_email.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#505050")));
-                login_password.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4B4B4")));
+                login_email.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#323232")));
+                login_password.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#505050")));
                 login_passwordLayout.setErrorEnabled(false);
                 return false;
             }
@@ -114,7 +115,7 @@ public class Profile extends AppCompatActivity {
         move_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Profile.this, Begin.class);
+                Intent intent = new Intent(LogIn.this, Begin.class);
                 startActivity(intent);
                 finish();
             }
@@ -135,7 +136,7 @@ public class Profile extends AppCompatActivity {
 
                 if (task.isSuccessful()) {
 
-                    Intent intent = new Intent(Profile.this, Home.class);
+                    Intent intent = new Intent(LogIn.this, Profile.class);
                     startActivity(intent);
                     finish();
 
@@ -153,6 +154,7 @@ public class Profile extends AppCompatActivity {
                                 if (document.exists()) {
                                     login_passwordLayout.setError("비밀번호가 일치하지 않습니다.");
                                 } else {
+                                    login_emailLayout.setErrorEnabled(true);
                                     login_emailLayout.setError("존재하지 않는 계정입니다.");
                                 }
                             } else {

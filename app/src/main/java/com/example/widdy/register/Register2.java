@@ -21,8 +21,8 @@ import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.widdy.Home;
-import com.example.widdy.Profile;
+import com.example.widdy.profile.Profile;
+import com.example.widdy.LogIn;
 import com.example.widdy.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -162,7 +162,7 @@ public class Register2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(Register2.this, Profile.class);
+                Intent intent = new Intent(Register2.this, LogIn.class);
                 startActivity(intent);
             }
         });
@@ -275,7 +275,7 @@ public class Register2 extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     //데이터 베이스 추가 완료 후 홈 화면으로 이동
-                                    Intent intent = new Intent(Register2.this, Home.class);
+                                    Intent intent = new Intent(Register2.this, Profile.class);
                                     startActivity(intent);
                                     finish();
                                     //가입완료시

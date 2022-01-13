@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.widdy.Home;
-import com.example.widdy.Profile;
+import com.example.widdy.profile.Profile;
+import com.example.widdy.LogIn;
 import com.example.widdy.R;
 import com.example.widdy.register.Register;
 import com.google.firebase.auth.FirebaseAuth;
@@ -107,7 +107,7 @@ public class Begin extends AppCompatActivity {
             case R.id.overflow_personal_info:
                 return true;
             case R.id.overflow_logIn:
-                Intent intent = new Intent(Begin.this, Profile.class);
+                Intent intent = new Intent(Begin.this, LogIn.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -123,7 +123,7 @@ public class Begin extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
             //user is already connected  so we need to redirect him to home page
-            Intent intent = new Intent(Begin.this, Home.class);
+            Intent intent = new Intent(Begin.this, Profile.class);
             startActivity(intent);
             finish();
         }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profile"
+    tools:context=".LogIn"
     android:background="@color/black">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,7 +46,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.35"
-            app:errorEnabled="true"
             app:errorIconDrawable="@color/transparent"
             android:theme="@style/TextFieldTheme">
 
@@ -59,7 +58,7 @@
                 android:inputType="textEmailAddress"
                 android:textColor="@color/white"
                 android:background="@drawable/round_rectangle"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/darkGray"
                 android:paddingVertical="20dp"
                 />
 
@@ -91,7 +90,7 @@
                 android:inputType="textPassword"
                 android:textColor="@color/white"
                 android:background="@drawable/round_rectangle"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/darkGray"
                 android:paddingVertical="20dp"
                 />
 

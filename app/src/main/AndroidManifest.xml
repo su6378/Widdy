@@ -10,15 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Widdy">
         <activity
-            android:name=".register.Register2"
+            android:name=".profile.ProfileCreate"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".register.Register2"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".register.Register"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Profile"
+            android:name=".LogIn"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -26,7 +30,7 @@
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Home"
+            android:name=".profile.Profile"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

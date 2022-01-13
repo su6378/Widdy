@@ -1,4 +1,4 @@
-package com.example.widdy;
+package com.example.widdy.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,14 +9,18 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.widdy.R;
 import com.example.widdy.begin.Begin;
+import com.example.widdy.onBackPressedListener;
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
-public class Home extends AppCompatActivity {
+public class Profile extends AppCompatActivity {
     private long lastTimeBackPressed;
     private Button logoutBtn;
+    private MaterialCardView profile_add;
     //뒤로가기 버튼
     @Override
     public void onBackPressed() {
@@ -53,9 +57,20 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
 
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(Home.this, Begin.class);
+                Intent intent = new Intent(Profile.this, Begin.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        //프로필 만들기 페이지로 이동
+        profile_add = findViewById(R.id.profile_add);
+
+        profile_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Profile.this,ProfileCreate.class);
+                startActivity(intent);
             }
         });
     }
