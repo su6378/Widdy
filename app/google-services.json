@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "542529329224",
+    "project_id": "widdy-3d0ed",
+    "storage_bucket": "widdy-3d0ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542529329224:android:102652012cfe1c6a16607d",
+        "android_client_info": {
+          "package_name": "com.example.widdy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542529329224-5cj49v699qj52hv7rulnmqcqkagsvovh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.widdy",
+            "certificate_hash": "8db59633256826650a8a424a99bed2b44c003722"
+          }
+        },
+        {
+          "client_id": "542529329224-svf6vjcbp2njk4pppo2uomr1vgebrs35.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD388Z1-7-kx1eL1YMskbGQgkIPM0eAn98"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542529329224-svf6vjcbp2njk4pppo2uomr1vgebrs35.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

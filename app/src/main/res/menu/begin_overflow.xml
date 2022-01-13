@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/overflow_personal_info"
+        android:title="개인정보"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/overflow_logIn"
+        android:title="로그인"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/overflow_question"
+        android:title="자주묻는 질문"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/overflow_customer_sevice"
+        android:title="고객센터"
+        android:iconTint="@color/gray"
+        app:showAsAction="never" />
+
+</menu>
