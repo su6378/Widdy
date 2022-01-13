@@ -10,11 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Widdy">
         <activity
-            android:name=".Register"
+            android:name=".register.Register2"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".LogIn"
+            android:name=".register.Register"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Profile"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

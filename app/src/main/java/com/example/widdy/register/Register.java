@@ -1,6 +1,7 @@
-package com.example.widdy;
+package com.example.widdy.register;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,10 +11,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.widdy.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.regex.Pattern;
 
@@ -23,7 +30,8 @@ public class Register extends AppCompatActivity {
     private TextInputLayout register_emailLayout;
     private TextInputEditText register_email;
     private Button nextBtn;
-    private ProgressBar progressBar;
+    private boolean emailcheck = false;
+    private FirebaseFirestore fStore;
 
     //뒤로가기 버튼
     @Override
@@ -71,6 +79,7 @@ public class Register extends AppCompatActivity {
                 if(validateEmail()==true){
                     register_emailLayout.setError("");
                     register_emailLayout.setHelperText("");
+                    register_emailLayout.setBoxStrokeColor(Color.parseColor("#52E252"));
                 }else{
                     register_emailLayout.setError("올바르지 않은 이메일 형식입니다.");
                 }
@@ -82,12 +91,22 @@ public class Register extends AppCompatActivity {
             }
         });
 
+
+
         //다음화면으로 이동
         nextBtn = findViewById(R.id.nextBtn);
+
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+
+                if(validateEmail()==true){
+                    emailCheck();
+
+                }else{
+
+                }
             }
         });
     }
@@ -101,6 +120,40 @@ public class Register extends AppCompatActivity {
             return true;
         } else {
             return false;
+        }
+    }
+
+    //이메일 중복 체크 메소드
+    private void emailCheck() {
+
+        fStore = FirebaseFirestore.getInstance();
+
+
+        String email = register_email.getText().toString().trim();
+        if (email.isEmpty()) {
+            register_emailLayout.setError("이메일을 입력해주세요.");
+
+        } else {
+
+            fStore.collection("user").document(email)
+                    .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            register_emailLayout.setError("이미 사용중인 아이디입니다.");
+                        } else {
+                            emailcheck = true;
+                            Intent intent = new Intent(Register.this, Register2.class);
+                            intent.putExtra("email", email);
+                            startActivity(intent);
+                            finish();
+                        }
+                    } else {
+                    }
+                }
+            });
         }
     }
 }
