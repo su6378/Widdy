@@ -10,9 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Widdy">
         <activity
-            android:name=".profile.ProfileCreate"
+            android:name=".profile.ProfileUpdate"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Main"
+            android:exported="true" />
+        <activity
+            android:name=".profile.ProfileCreate"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".register.Register2"
             android:exported="true"

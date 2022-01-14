@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profile.ProfileCreate"
-    android:background="@color/black">
+    android:background="@color/black"
+    tools:context=".profile.ProfileCreate">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/profile_create_appbar"
@@ -16,25 +16,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
             android:text="프로필 만들기"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:paddingVertical="20dp"
-            android:textColor="@color/white"
-            android:textSize="20sp"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/createBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="-10dp"
             android:text="저장"
-            android:textSize="18sp"
             android:textColor="@color/green"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="18sp"
+            android:background="@color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginRight="10dp"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -42,15 +44,15 @@
         android:id="@+id/profile_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/profile_create_appbar"
+        android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="10dp"
-        >
+        app:layout_constraintTop_toBottomOf="@id/profile_create_appbar">
+
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/profile_icon"/>
+            android:src="@drawable/profile_icon" />
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.cardview.widget.CardView
@@ -58,42 +60,99 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="-5dp"
-        app:layout_constraintRight_toRightOf="@id/profile_image"
-        app:layout_constraintBottom_toBottomOf="@id/profile_image">
+        app:layout_constraintBottom_toBottomOf="@id/profile_image"
+        app:layout_constraintRight_toRightOf="@id/profile_image">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:padding="5dp"
-            android:src="@drawable/ic_pencil"/>
+            android:src="@drawable/ic_pencil" />
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profile_nameLayout"
-        style="@style/TextFieldTheme"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="60dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/image_update"
-        android:layout_marginTop="20dp"
-        app:errorEnabled="true"
-        android:hint="프로필 이름"
-        app:hintTextColor="@color/white"
-        android:theme="@style/TextFieldTheme">
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="10dp"
+        android:textColorHint="@color/gray"
+        app:errorTextColor="@color/white"
+        app:hintTextColor="@color/gray"
+        app:layout_constraintTop_toBottomOf="@id/image_update">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/profile_name"
+            style="@style/TextFieldTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_rectangle"
-            android:backgroundTint="@color/darkGray">
-
-        </com.google.android.material.textfield.TextInputEditText>
-
+            android:background="@color/darkGray"
+            android:hint="프로필 이름"
+            android:layout_marginTop="10dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray"
+            android:theme="@style/TextFieldTheme" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/profile_create_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="표시할 콘텐츠:"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_nameLayout" />
 
+    <RadioGroup
+        android:id="@+id/profile_create_radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/profile_create_text">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/rg_btn1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="40dp"
+            android:buttonTint="@color/blue"
+            android:text="어린이용"
+            android:textColor="@color/white"/>
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/rg_btn2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="@color/blue"
+            android:text="청소년용"
+            android:layout_marginHorizontal="10dp"
+            android:textColor="@color/white"/>
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/rg_btn3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="@color/blue"
+            android:text="성인용"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/white"/>
+    </RadioGroup>
+    <TextView
+        android:id="@+id/radio_error"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/profile_create_radioGroup"
+        android:text="표시할 콘텐츠를 선택해주세요."
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/green"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

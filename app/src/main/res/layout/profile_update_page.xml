@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.ProfileUpdate"
+    android:background="@color/black"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profile_create_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/profile_manage_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:text="프로필 변경"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            app:layout_constraintLeft_toRightOf="@id/backBtn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/profile_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_create_appbar">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/profile_icon" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/image_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="-5dp"
+        app:layout_constraintBottom_toBottomOf="@id/profile_image"
+        app:layout_constraintRight_toRightOf="@id/profile_image">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_pencil" />
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/profile_nameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="10dp"
+        android:textColorHint="@color/gray"
+        app:errorTextColor="@color/white"
+        app:hintTextColor="@color/gray"
+        app:layout_constraintTop_toBottomOf="@id/image_update">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/profile_name"
+            style="@style/TextFieldTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/darkGray"
+            android:hint="프로필 이름"
+            android:layout_marginTop="10dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray"
+            android:theme="@style/TextFieldTheme" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/profile_update_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="모든 관람등급"
+        android:padding="10dp"
+        android:background="@drawable/round_rectangle"
+        android:backgroundTint="@color/darkGray"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_nameLayout" />
+
+
+    <TextView
+        android:id="@+id/profile_update_text2"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/profile_update_text"
+        android:text="이 프로필에서는 모든 관람등급의 콘텐츠가 표시됩니다."
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/profile_update_text3"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/profile_update_text2"
+        android:text="계정 설정에서 변경할 수 있습니다."
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/lightgray"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/next_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/profile_update_text3"
+        android:background="@drawable/round_rectangle"
+        android:backgroundTint="@color/darkGray"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/next_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/next_text2"
+            android:text="다음 화 자동 재생"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/next_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/next_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="모든 디바이스에 적용"
+            android:textColor="@color/lightgray"
+            android:textStyle="bold"
+            android:textSize="12sp"/>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+
+            android:id="@+id/update_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:thumbTint="@color/white"
+            app:trackTint="@color/lightgray"
+            android:layout_marginLeft="50dp"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/autoplay_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/next_layout"
+        android:background="@drawable/round_rectangle"
+        android:backgroundTint="@color/darkGray"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/autoplay_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/autoplay_text2"
+            android:text="미리보기 자동 재생"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/autoplay_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/autoplay_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="모든 디바이스에서 둘러보는 동안"
+            android:textColor="@color/lightgray"
+            android:textStyle="bold"
+            android:textSize="12sp"/>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+
+            android:id="@+id/update_switch2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:thumbTint="@color/white"
+            app:trackTint="@color/lightgray"
+            android:layout_marginLeft="50dp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/deleteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:drawableLeft="@drawable/ic_trashcan"
+        android:drawableTint="@color/white"
+        android:drawablePadding="10dp"
+        android:text="프로필 삭제"
+        android:textColor="@color/white"
+        android:background="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/delete_progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:indeterminateTint="@color/white"
+        app:layout_constraintTop_toTopOf="@id/deleteBtn"
+        app:layout_constraintLeft_toLeftOf="@id/deleteBtn"
+        app:layout_constraintRight_toRightOf="@id/deleteBtn"
+        app:layout_constraintBottom_toBottomOf="@id/deleteBtn"
+        android:visibility="invisible"/>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+

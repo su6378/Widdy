@@ -46,7 +46,7 @@ public class Register2 extends AppCompatActivity {
     private CheckBox privacy_policy;
     private Button nextBtn;
     private ProgressBar register_progress;
-    FirebaseFirestore fStore;
+    private FirebaseFirestore fStore;
     private FirebaseAuth mAuth;
 
     //비밀번호 정규식 패턴
@@ -284,14 +284,10 @@ public class Register2 extends AppCompatActivity {
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Log.d("테스트1","실패");
                                 }
                             });
 
                         } else {
-
-
-                            Log.d("테스트2","실패");
 
                         }
                     }
