@@ -57,9 +57,36 @@ public class ProfileUpdate extends AppCompatActivity {
     //뒤로가기 버튼
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent();
-        setResult(RESULT_OK, intent);
-        finish();
+        //닉네임 변경된 값 저장하기
+        fStore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        String nickname = profile_name.getText().toString().trim();
+
+        fStore.collection("user").document(currentUser.getEmail()).update("nickname",nickname)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            fStore.collection("user").document(currentUser.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if(task.isSuccessful()){
+                                        DocumentSnapshot document = task.getResult();
+                                        if(document.exists()){
+                                            String nickname2 = document.getString("nickname");
+                                            if(nickname.equals(nickname2)){
+                                                Intent intent = new Intent(ProfileUpdate.this,Profile.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
 
     }
 
@@ -71,16 +98,6 @@ public class ProfileUpdate extends AppCompatActivity {
         Intent intent = getIntent();
         final String nickname = intent.getStringExtra("nickname");
 
-        //뒤로가기
-        backBtn = findViewById(R.id.backBtn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                setResult(RESULT_OK, intent);
-                finish();
-            }
-        });
 
         //프로필 이름
         profile_name = findViewById(R.id.profile_name);
@@ -211,6 +228,44 @@ public class ProfileUpdate extends AppCompatActivity {
                 AlertDialog alert = alt_bld.create();
 
                 alert.show();
+            }
+        });
+
+        //뒤로가기
+        backBtn = findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //닉네임 변경된 값 저장하기
+                fStore = FirebaseFirestore.getInstance();
+                mAuth = FirebaseAuth.getInstance();
+                currentUser = mAuth.getCurrentUser();
+                String nickname = profile_name.getText().toString().trim();
+
+                fStore.collection("user").document(currentUser.getEmail()).update("nickname",nickname)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    fStore.collection("user").document(currentUser.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if(task.isSuccessful()){
+                                                DocumentSnapshot document = task.getResult();
+                                                if(document.exists()){
+                                                    String nickname2 = document.getString("nickname");
+                                                    if(nickname.equals(nickname2)){
+                                                        Intent intent = new Intent(ProfileUpdate.this,Profile.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
             }
         });
     }

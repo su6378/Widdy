@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewManager;
@@ -88,6 +89,7 @@ public class Profile extends AppCompatActivity {
         super.onResume();
         initData();
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,6 +190,12 @@ public class Profile extends AppCompatActivity {
                                     updateBtn.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
+                                            //중첩 레이아웃 삭제하기
+                                            ((ViewManager) ll.getParent()).removeView(ll);
+                                            profile_text.setVisibility(View.VISIBLE);
+                                            profile_logo.setVisibility(View.VISIBLE);
+                                            profile_update.setVisibility(View.VISIBLE);
+                                            nextBtn.setEnabled(true);
                                             Intent intent = new Intent(Profile.this, ProfileUpdate.class);
                                             intent.putExtra("nickname", nickname);
                                             startActivity(intent);
@@ -253,6 +261,7 @@ public class Profile extends AppCompatActivity {
                                             profile_nickname.setTextColor(Color.parseColor("#FFFFFF"));
                                             profile_page.setVisibility(View.VISIBLE);
                                             profile_progress.setVisibility(View.INVISIBLE);
+                                            Log.d("테스트",nickname);
                                             return false;
                                         }
                                     }).into(profile_image);
