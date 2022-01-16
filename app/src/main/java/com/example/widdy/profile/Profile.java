@@ -50,7 +50,7 @@ public class Profile extends AppCompatActivity {
     private long lastTimeBackPressed;
     private Button logoutBtn;
     private MaterialCardView nextBtn;
-    private TextView profile_nickname,profile_text,profile_logo;
+    private TextView profile_nickname, profile_text, profile_logo;
     private FirebaseFirestore fStore;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
@@ -95,6 +95,10 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
+
+        //하단바 색깔 적용
+        getWindow().setNavigationBarColor(Color.parseColor("#282828"));
+
 
         //프로그레스바
         profile_progress = findViewById(R.id.profile_progress);
@@ -261,7 +265,7 @@ public class Profile extends AppCompatActivity {
                                             profile_nickname.setTextColor(Color.parseColor("#FFFFFF"));
                                             profile_page.setVisibility(View.VISIBLE);
                                             profile_progress.setVisibility(View.INVISIBLE);
-                                            Log.d("테스트",nickname);
+                                            Log.d("테스트", nickname);
                                             return false;
                                         }
                                     }).into(profile_image);

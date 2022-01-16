@@ -15,7 +15,8 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Main"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".profile.ProfileCreate"
             android:exported="true"
