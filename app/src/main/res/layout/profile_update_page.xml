@@ -104,7 +104,7 @@
         android:layout_marginTop="30dp"
         android:text="모든 관람등급"
         android:padding="10dp"
-        android:background="@drawable/round_rectangle"
+        android:background="@drawable/normal_rectangle"
         android:backgroundTint="@color/darkGray"
         android:textColor="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -139,7 +139,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/profile_update_text3"
-        android:background="@drawable/round_rectangle"
+        android:background="@drawable/normal_rectangle"
         android:backgroundTint="@color/darkGray"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="20dp">
@@ -193,7 +193,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/next_layout"
-        android:background="@drawable/round_rectangle"
+        android:background="@drawable/normal_rectangle"
         android:backgroundTint="@color/darkGray"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp">

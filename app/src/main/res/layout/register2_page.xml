@@ -200,7 +200,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/round_rectangle"
+        android:background="@drawable/normal_rectangle"
         android:backgroundTint="@color/blue"
         android:gravity="center"
         android:text="동의하고 계속"
