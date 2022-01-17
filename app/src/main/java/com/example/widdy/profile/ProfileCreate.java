@@ -56,6 +56,9 @@ public class ProfileCreate extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_create_page);
 
+        //하단바 색깔 적용
+        getWindow().setNavigationBarColor(Color.parseColor("#282828"));
+
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         currentUser = mAuth.getCurrentUser();

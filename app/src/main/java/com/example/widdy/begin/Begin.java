@@ -1,6 +1,7 @@
 package com.example.widdy.begin;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +40,9 @@ public class Begin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.begin_page);
+
+        //하단바 색깔 적용
+        getWindow().setNavigationBarColor(Color.parseColor("#282828"));
 
         //툴바
         toolbar = findViewById(R.id.toolbar);

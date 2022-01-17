@@ -48,6 +48,9 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_in_page);
 
+        //하단바 색깔 적용
+        getWindow().setNavigationBarColor(Color.parseColor("#282828"));
+
         //뒤로가기
         backBtn = findViewById(R.id.backBtn);
         backBtn.setOnClickListener(new View.OnClickListener() {

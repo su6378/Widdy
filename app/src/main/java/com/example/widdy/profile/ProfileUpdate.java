@@ -95,6 +95,9 @@ public class ProfileUpdate extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_update_page);
 
+        //하단바 색깔 적용
+        getWindow().setNavigationBarColor(Color.parseColor("#282828"));
+
         Intent intent = getIntent();
         final String nickname = intent.getStringExtra("nickname");
 

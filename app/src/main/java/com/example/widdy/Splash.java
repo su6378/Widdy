@@ -1,6 +1,7 @@
 package com.example.widdy;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -30,6 +31,9 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_page);
+
+        //하단바 색깔 적용
+        getWindow().setNavigationBarColor(Color.parseColor("#282828"));
 
         //애니메이션
         anim_ball= AnimationUtils.loadAnimation(this, R.anim.splash_ball);

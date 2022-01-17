@@ -48,6 +48,9 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_page);
 
+        //하단바 색깔 적용
+        getWindow().setNavigationBarColor(Color.parseColor("#282828"));
+
         //취소하기
         cancelBtn = findViewById(R.id.cancelBtn);
 

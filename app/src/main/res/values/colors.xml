@@ -16,6 +16,7 @@
     <color name="green">#52E252</color>
     <color name="darkRed">#CD0000</color>
     <color name="darkGray">#323232</color>
+    <color name="lightblack">#282828</color>
     <!--<color name="red">#</color>-->
 
 </resources>

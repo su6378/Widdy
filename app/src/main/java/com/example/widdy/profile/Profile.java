@@ -27,7 +27,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.example.widdy.Main;
+import com.example.widdy.main.Main;
 import com.example.widdy.R;
 import com.example.widdy.begin.Begin;
 import com.example.widdy.onBackPressedListener;
@@ -265,7 +265,6 @@ public class Profile extends AppCompatActivity {
                                             profile_nickname.setTextColor(Color.parseColor("#FFFFFF"));
                                             profile_page.setVisibility(View.VISIBLE);
                                             profile_progress.setVisibility(View.INVISIBLE);
-                                            Log.d("테스트", nickname);
                                             return false;
                                         }
                                     }).into(profile_image);

@@ -78,6 +78,9 @@ public class Register2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register2_page);
 
+        //하단바 색깔 적용
+        getWindow().setNavigationBarColor(Color.parseColor("#282828"));
+
         //이메일 불러오기
         register_email = findViewById(R.id.register_email);
         register_emailLayout = findViewById(R.id.register_emailLayout);
