@@ -26,6 +26,7 @@ public class Main extends AppCompatActivity {
     private Game game = new Game();
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,7 @@ public class Main extends AppCompatActivity {
 
     }
 
+
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
@@ -78,6 +80,8 @@ public class Main extends AppCompatActivity {
             {
                 case R.id.menu_home:
                     transaction.replace(R.id.frameLayout, home).commitAllowingStateLoss();
+                    //하단바 색깔 적용
+                    getWindow().setNavigationBarColor(Color.parseColor("#282828"));
                     break;
                 case R.id.menu_game:
                     transaction.replace(R.id.frameLayout, game).commitAllowingStateLoss();
@@ -86,4 +90,6 @@ public class Main extends AppCompatActivity {
             return true;
         }
     }
+
+
 }
