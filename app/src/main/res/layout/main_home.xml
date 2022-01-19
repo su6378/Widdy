@@ -491,24 +491,25 @@
 
             <HorizontalScrollView
                 android:id="@+id/playing_scrollView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:background="@color/black"
                 android:scrollbars="none"
                 android:fillViewport="true"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/home_nickname">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     >
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/playing_recyclerView"
                         android:nestedScrollingEnabled="false"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:background="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -516,7 +517,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </RelativeLayout>
 
 
             </HorizontalScrollView>
@@ -536,23 +537,23 @@
 
 
                 <HorizontalScrollView
+                    app:layout_constraintLeft_toLeftOf="parent"
                     android:id="@+id/widdy_movie_scrollView"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/black"
                     android:scrollbars="none"
                     app:layout_constraintTop_toBottomOf="@id/widdy_movie_text">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             >
-
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/widdy_movie_recyclerView"
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:background="@color/black"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
@@ -560,7 +561,7 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
 
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        </RelativeLayout>
 
 
 
