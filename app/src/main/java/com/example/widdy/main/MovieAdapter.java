@@ -1,6 +1,5 @@
 package com.example.widdy.main;
 
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,17 +21,14 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.widdy.R;
-import com.example.widdy.profile.Profile;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class PlayingAdapter extends RecyclerView.Adapter<PlayingAdapter.ViewHolder> {
-
-    private ArrayList<PlayingItem> items = new ArrayList<>();
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
+    private ArrayList<MovieItem> items = new ArrayList<>();
     private OnItemClickListner listner;
 
     public interface OnItemClickListner {
@@ -40,23 +37,21 @@ public class PlayingAdapter extends RecyclerView.Adapter<PlayingAdapter.ViewHold
 
     @NonNull
     @Override
-    public PlayingAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.playing_recycler_item, parent, false);
+    public MovieAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_recycler_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemView);
 
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlayingAdapter.ViewHolder viewHolder, int position) {
-        PlayingItem item = items.get(position);
+    public void onBindViewHolder(@NonNull MovieAdapter.ViewHolder viewHolder, int position) {
+        MovieItem item = items.get(position);
 
-        viewHolder.playing_progressbar.setVisibility(View.VISIBLE);
-        viewHolder.playing_image.setVisibility(View.INVISIBLE);
-        viewHolder.ic_playing.setVisibility(View.INVISIBLE);
+        viewHolder.movie_progressbar.setVisibility(View.VISIBLE);
+        viewHolder.movie_image.setVisibility(View.INVISIBLE);
 
-        viewHolder.playing_id.setText(item.getUrl());
+        viewHolder.movie_id.setText(item.getUrl());
 
 
         //이미지 불러오기
@@ -74,17 +69,14 @@ public class PlayingAdapter extends RecyclerView.Adapter<PlayingAdapter.ViewHold
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        viewHolder.playing_progressbar.setVisibility(View.INVISIBLE);
-                        viewHolder.playing_image.setVisibility(View.VISIBLE);
-                        viewHolder.ic_playing.setVisibility(View.VISIBLE);
+                        viewHolder.movie_progressbar.setVisibility(View.INVISIBLE);
+                        viewHolder.movie_image.setVisibility(View.VISIBLE);
                         return false;
                     }
-                }).into(viewHolder.playing_image);
+                }).into(viewHolder.movie_image);
 
             }
         });
-
-
 
     }
     public void OnItemClick(ViewHolder holder, View view, int position) {
@@ -103,48 +95,33 @@ public class PlayingAdapter extends RecyclerView.Adapter<PlayingAdapter.ViewHold
         return items.size();
     }
 
-    public void setItems(ArrayList<PlayingItem> items) {
+    public void setItems(ArrayList<MovieItem> items) {
         this.items = items;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView playing_image,playing_more,playing_info,ic_playing;
-        ProgressBar playing_progressbar;
-        TextView playing_id;
+        ImageView movie_image;
+        ProgressBar movie_progressbar;
+        TextView movie_id;
+        ConstraintLayout movie_layout;
 
         ViewHolder(View itemView) {
             super(itemView);
 
-            playing_image = itemView.findViewById(R.id.playing_image);
-            ic_playing = itemView.findViewById(R.id.ic_playing);
-            playing_progressbar = itemView.findViewById(R.id.playing_progressbar);
-            playing_info = itemView.findViewById(R.id.playing_info);
-            playing_id = itemView.findViewById(R.id.playing_id);
-            playing_more = itemView.findViewById(R.id.playing_more);
+            movie_image = itemView.findViewById(R.id.movie_image);
+            movie_progressbar = itemView.findViewById(R.id.movie_progressbar);
+            movie_id = itemView.findViewById(R.id.movie_id);
+            movie_layout = itemView.findViewById(R.id.movie_layout);
 
-            playing_info.setOnClickListener(new View.OnClickListener() {
+            movie_layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (listner != null) {
                         listner.OnItemClick(ViewHolder.this, view, getAdapterPosition());
-
                     }
                 }
             });
-
-            playing_more.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (listner != null) {
-                        listner.OnItemClick(ViewHolder.this, view, getAdapterPosition());
-
-                    }
-                }
-            });
-
-
-
         }
     }
 }
