@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.widdy.R;
 
-public class Game extends Fragment {
+public class NewnHot extends Fragment {
 
 
     @Override
@@ -22,7 +22,7 @@ public class Game extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.main_game, container, false);
+        View view = inflater.inflate(R.layout.main_newnhot, container, false);
 
         return view;
     }

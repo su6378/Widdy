@@ -40,6 +40,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.widdy.R;
 import com.example.widdy.profile.Profile;
+import com.example.widdy.profile.ProfileEtc;
 import com.example.widdy.profile.ProfileUpdate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -65,9 +66,9 @@ import java.util.Map;
 
 public class Home extends Fragment {
 
-    private ImageView home_image, info_image, info_cancel;
+    private ImageView home_image, info_image, info_cancel, home_ic_add,info_ic_add,home_profile;
     private TextView home_nickname, info_title, info_day, info_content, home_image_id;
-    private ConstraintLayout home_playBtn, info_bottom_sheet, bottom_layout, home_ic_infoLayout, info_playBtn;
+    private ConstraintLayout home_playBtn, info_bottom_sheet, bottom_layout, home_ic_infoLayout, info_playBtn, home_ic_addLayout,info_saveLayout;
     private ProgressBar bottom_progressbar, main_progressbar;
 
     private FirebaseFirestore fStore;
@@ -78,7 +79,7 @@ public class Home extends Fragment {
 
     private PlayingAdapter adapter = new PlayingAdapter();
     private MovieAdapter movieAdapter = new MovieAdapter();
-    private RecyclerView playing_recyclerView,widdy_movie_recyclerView;
+    private RecyclerView playing_recyclerView, widdy_movie_recyclerView;
     private NestedScrollView home_scrollView;
     private CardView info_imageLayout;
 
@@ -110,6 +111,11 @@ public class Home extends Fragment {
         home_image = view.findViewById(R.id.home_image);
         home_image_id = view.findViewById(R.id.home_image_id);
         main_progressbar = view.findViewById(R.id.main_progressbar);
+        home_profile = view.findViewById(R.id.home_profile);
+
+        //찜한 콘텐츠
+        home_ic_addLayout = view.findViewById(R.id.home_ic_addLayout);
+        home_ic_add = view.findViewById(R.id.home_ic_add);
 
         //닉네임 님이 시청중인 콘텐츠
         home_nickname = view.findViewById(R.id.home_nickname);
@@ -120,14 +126,11 @@ public class Home extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         playing_recyclerView.setLayoutManager(layoutManager);
-        //LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-        //widdy_movie_recyclerView.setLayoutManager(layoutManager2);
 
         //리사이클러뷰 방향
         //세로
         // playing_recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //가로
-        //playing_recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         widdy_movie_recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
 
         //시청중인 콘텐츠 불러오기
@@ -139,6 +142,14 @@ public class Home extends Fragment {
         //화면 초기화
         initData();
 
+        //프로필 아이콘 클릭 시
+        home_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ProfileEtc.class);
+                startActivity(intent);
+            }
+        });
 
         //홈 재생버튼 클릭 시
         home_playBtn = view.findViewById(R.id.home_playBtn);
@@ -155,6 +166,15 @@ public class Home extends Fragment {
             }
         });
 
+
+        //홈 찜한 콘텐츠 클릭 시
+        home_ic_addLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isAdd(home_ic_add);
+            }
+        });
+
         //바텀시트
         home_ic_infoLayout = view.findViewById(R.id.home_ic_infoLayout);
         info_image = view.findViewById(R.id.info_image);
@@ -166,6 +186,8 @@ public class Home extends Fragment {
         bottom_progressbar = view.findViewById(R.id.bottom_progressbar);
         info_imageLayout = view.findViewById(R.id.info_imageLayout);
         info_playBtn = view.findViewById(R.id.info_playBtn);
+        info_saveLayout = view.findViewById(R.id.info_saveLayout);
+        info_ic_add = view.findViewById(R.id.info_ic_add);
 
         //바텀시트 애니메이션
         animSlideUp = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_up);
@@ -192,6 +214,12 @@ public class Home extends Fragment {
                 bottom_layout.setVisibility(View.INVISIBLE);
                 bottom_progressbar.setVisibility(View.INVISIBLE);
 
+                //뒤에 터치 해제
+                info_bottom_sheet.setClickable(false);
+
+                //id 값 초기화
+                title_id = "squid_game";
+
             }
         });
 
@@ -210,6 +238,15 @@ public class Home extends Fragment {
                 isPlay();
             }
         });
+
+        //바텀시트 찜하기 버튼 클릭시
+        info_saveLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isAdd(info_ic_add);
+            }
+        });
+
         return view;
     }
 
@@ -217,6 +254,10 @@ public class Home extends Fragment {
 
         home_scrollView.setVisibility(View.INVISIBLE);
         main_progressbar.setVisibility(View.VISIBLE);
+
+        //데이터불러올때 터치 막기
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
         fStore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -242,6 +283,8 @@ public class Home extends Fragment {
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         home_scrollView.setVisibility(View.VISIBLE);
                         main_progressbar.setVisibility(View.INVISIBLE);
+                        //이미지 로드 완료시 터치 허용
+                        getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                         return false;
                     }
                 }).into(home_image);
@@ -265,12 +308,37 @@ public class Home extends Fragment {
             }
         });
 
+        //찜한 콘텐츠 아이콘 불러오기
+        fStore.collection("user").document(currentUser.getEmail()).collection("movie").document("squid_game").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        if ( document.getBoolean("isAdd") == null) {
+                            //+ 이미지로 변경
+                            home_ic_add.setImageResource(R.drawable.ic_add);
+                        }else if(document.getBoolean("isAdd") == false ) {
+                            //+ 이미지로 변경
+                            home_ic_add.setImageResource(R.drawable.ic_add);
+                        } else if (document.getBoolean("isAdd") == true) {
+                            //체크 이미지로 변경
+                            home_ic_add.setImageResource(R.drawable.ic_check);
+                        }
+                    } else {
+                        //+ 이미지로 변경
+                        home_ic_add.setImageResource(R.drawable.ic_add);
+                    }
+                }
+            }
+        });
+
+
 
     }
 
     //위디 콘텐츠 불러오기
-    private void movieData(){
-
+    private void movieData() {
 
         fStore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -291,7 +359,6 @@ public class Home extends Fragment {
 
                        /* PlayingItem movie1 = new PlayingItem(id,
                                 "action", title, "this movie open in 2018.01");*/
-                        Log.d("테스트", String.valueOf(document.getData()));
                         data.add(new MovieItem(id,
                                 "action", title, "this movie open in 2018.01"));
 
@@ -309,31 +376,47 @@ public class Home extends Fragment {
                 }
             }
         });
-        //아이콘 클릭시 id값을 변경하고 메소드 실행
+        //포스터 클릭시 id값을 변경하고 메소드 실행
         movieAdapter.setItemClickListener(new MovieAdapter.OnItemClickListner() {
             @Override
             public void OnItemClick(MovieAdapter.ViewHolder holder, View view, int position) {
 
-                //user 콜렉션에 isPlay값 추가
-                if(view.getId() == R.id.movie_layout){
+                //isPlay값이 없으면 추가하고 있으면 info 창 그대로 띄우기
+                if (view.getId() == R.id.movie_layout) {
                     title_id = holder.movie_id.getText().toString();
-
-                    DocumentReference documentReference = fStore.collection("user").document(currentUser.getEmail()).collection("movie")
-                            .document(title_id);
-
-                    Map<String, Object> user = new HashMap<>();
-                    user.put("isPlay", false);
-
-                    documentReference.set(user, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    fStore.collection("user").document(currentUser.getEmail()).collection("movie").document(title_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
-                                info();
+                                DocumentSnapshot document = task.getResult();
+                                //값이 존재하면 그냥 창만 띄우기
+                                if (document.exists()) {
+                                    info();
+                                    //뒤에 화면 터치 막기기
+                                    info_bottom_sheet.setClickable(true);
+                                } else {
+                                    //user 콜렉션에 isPlay,isAdd값 추가
+                                    DocumentReference documentReference = fStore.collection("user").document(currentUser.getEmail()).collection("movie")
+                                            .document(title_id);
+
+                                    Map<String, Object> user = new HashMap<>();
+                                    user.put("isPlay", false);
+
+
+                                    documentReference.set(user, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                info();
+                                                info_bottom_sheet.setClickable(true);
+                                            }
+                                        }
+                                    });
+                                }
                             }
                         }
                     });
                 }
-
             }
         });
     }
@@ -450,6 +533,31 @@ public class Home extends Fragment {
                 }
             }
         });
+
+        //찜한 콘텐츠 아이콘 불러오기
+        fStore.collection("user").document(currentUser.getEmail()).collection("movie").document(title_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        if ( document.getBoolean("isAdd") == null) {
+                            //+ 이미지로 변경
+                            info_ic_add.setImageResource(R.drawable.ic_add);
+                        }else if(document.getBoolean("isAdd") == false ) {
+                            //+ 이미지로 변경
+                            info_ic_add.setImageResource(R.drawable.ic_add);
+                        } else if (document.getBoolean("isAdd") == true) {
+                            //체크 이미지로 변경
+                            info_ic_add.setImageResource(R.drawable.ic_check);
+                        }
+                    } else {
+                        //+ 이미지로 변경
+                        info_ic_add.setImageResource(R.drawable.ic_add);
+                    }
+                }
+            }
+        });
     }
 
     //홈 이미지 재생했는지 안했는지 판단 메소드
@@ -530,6 +638,77 @@ public class Home extends Fragment {
                                             });
                                         }
                                     }).setNegativeButton("취소", null).show();
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    //찜했는지 안했는지 판단 메소드
+    private void isAdd(ImageView imageview) {
+        fStore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+
+        fStore.collection("user").document(currentUser.getEmail()).collection("movie").document(title_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        //찜한 적이 없으면 값 추가
+                        if(document.getBoolean("isAdd") == null){
+                            DocumentReference documentReference = fStore.collection("user").document(currentUser.getEmail()).collection("movie")
+                                    .document(title_id);
+
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("isAdd", true);
+
+                            documentReference.set(user, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        //+ 이미지로 변경
+                                        imageview.setImageResource(R.drawable.ic_check);
+                                    }
+                                }
+                            });
+                        }
+                        //찜했을 때는 취소로 변경
+                        else if (document.getBoolean("isAdd") == true) {
+                            DocumentReference documentReference = fStore.collection("user").document(currentUser.getEmail()).collection("movie")
+                                    .document(title_id);
+
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("isAdd", false);
+
+                            documentReference.set(user, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        //+ 이미지로 변경
+                                        imageview.setImageResource(R.drawable.ic_add);
+                                    }
+                                }
+                            });
+                        } else if((document.getBoolean("isAdd") == false)) {
+                            //찜한 상태가 아니면 반대로 찜한 목록에 추가
+                            DocumentReference documentReference = fStore.collection("user").document(currentUser.getEmail()).collection("movie")
+                                    .document(title_id);
+
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("isAdd", true);
+
+                            documentReference.set(user, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        //체크 이미지로 변경
+                                        imageview.setImageResource(R.drawable.ic_check);
+                                    }
+                                }
+                            });
                         }
                     }
                 }

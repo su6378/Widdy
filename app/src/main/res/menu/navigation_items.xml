@@ -4,14 +4,11 @@
         android:title="홈"
         android:icon="@drawable/ic_home"
         />
-    <item android:id="@+id/menu_game"
-        android:title="게임"
-        android:icon="@drawable/ic_game"/>
-    <item android:id="@+id/menu_myPage"
+    <item android:id="@+id/menu_new_hot"
         android:title="New &amp; Hot"
         android:icon="@drawable/ic_newhot"/>
-    <item android:id="@+id/menu_save_content"
-        android:title="저장한 콘텐츠 목록"
-        android:icon="@drawable/ic_download"/>
+    <item android:id="@+id/menu_add_content"
+        android:title="찜한 콘텐츠 목록"
+        android:icon="@drawable/ic_check"/>
 
 </menu>

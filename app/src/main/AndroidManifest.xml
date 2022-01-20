@@ -14,13 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Widdy">
         <activity
-            android:name=".profile.ProfileUpdate"
+            android:name=".profile.ProfileManage"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
+            android:name=".profile.ProfileEtc"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".profile.ProfileUpdate"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".main.Main"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar2"/>
+            android:theme="@style/AppTheme.NoActionBar2" />
         <activity
             android:name=".profile.ProfileCreate"
             android:exported="true"

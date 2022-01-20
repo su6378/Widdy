@@ -13,9 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.example.widdy.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -23,7 +21,8 @@ public class Main extends AppCompatActivity {
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private Home home = new Home();
-    private Game game = new Game();
+    private NewnHot newnHot = new NewnHot();
+    private AddContent addContent = new AddContent();
 
 
 
@@ -80,12 +79,12 @@ public class Main extends AppCompatActivity {
             {
                 case R.id.menu_home:
                     transaction.replace(R.id.frameLayout, home).commitAllowingStateLoss();
-                    //하단바 색깔 적용
-                    getWindow().setNavigationBarColor(Color.parseColor("#282828"));
                     break;
-                case R.id.menu_game:
-                    transaction.replace(R.id.frameLayout, game).commitAllowingStateLoss();
+                case R.id.menu_new_hot:
+                    transaction.replace(R.id.frameLayout, newnHot).commitAllowingStateLoss();
                     break;
+                case  R.id.menu_add_content:
+                    transaction.replace(R.id.frameLayout,addContent).commitAllowingStateLoss();
             }
             return true;
         }

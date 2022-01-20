@@ -76,8 +76,8 @@ public class ProfileUpdate extends AppCompatActivity {
                                         if(document.exists()){
                                             String nickname2 = document.getString("nickname");
                                             if(nickname.equals(nickname2)){
-                                                Intent intent = new Intent(ProfileUpdate.this,Profile.class);
-                                                startActivity(intent);
+                                                Intent intent = new Intent();
+                                                setResult(RESULT_OK, intent);
                                                 finish();
                                             }
                                         }
@@ -258,8 +258,8 @@ public class ProfileUpdate extends AppCompatActivity {
                                                 if(document.exists()){
                                                     String nickname2 = document.getString("nickname");
                                                     if(nickname.equals(nickname2)){
-                                                        Intent intent = new Intent(ProfileUpdate.this,Profile.class);
-                                                        startActivity(intent);
+                                                        Intent intent = new Intent();
+                                                        setResult(RESULT_OK, intent);
                                                         finish();
                                                     }
                                                 }

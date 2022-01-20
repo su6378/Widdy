@@ -48,7 +48,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Profile extends AppCompatActivity {
     private long lastTimeBackPressed;
-    private Button logoutBtn;
     private MaterialCardView nextBtn;
     private TextView profile_nickname, profile_text, profile_logo;
     private FirebaseFirestore fStore;
@@ -109,19 +108,6 @@ public class Profile extends AppCompatActivity {
         profile_image = findViewById(R.id.profile_image);
         profile_nickname = findViewById(R.id.profile_nickname);
 
-        //로그아웃
-        logoutBtn = findViewById(R.id.logoutBtn);
-
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(Profile.this, Begin.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         //프로필 생성 or 변경 or 메인 페이지 이동
         nextBtn = findViewById(R.id.nextBtn);
@@ -153,59 +139,12 @@ public class Profile extends AppCompatActivity {
                                 if (nickname == null) {
 
                                 } else {
-                                    //프로필 관리 창 띄우기
 
-                                    profile_text.setVisibility(View.INVISIBLE);
-                                    profile_logo.setVisibility(View.INVISIBLE);
-                                    profile_update.setVisibility(View.INVISIBLE);
-                                    nextBtn.setEnabled(false);
+                                    //회원정보 관리 페이지로 이동
+                                    Intent intent = new Intent(Profile.this, ProfileManage.class);
+                                    intent.putExtra("nickname", nickname);
+                                    startActivity(intent);
 
-
-                                    //레이아웃을 위에 겹쳐서 올리는 부분
-                                    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-                                    //레이아웃 객체생성
-                                    ConstraintLayout ll = (ConstraintLayout) inflater.inflate(R.layout.profile_manage_page, null);
-
-                                    //레이아웃 배경 투명도 주기
-                                    ll.setBackgroundColor(Color.parseColor("#99000000"));
-
-                                    //레이아웃 위에 겹치기
-                                    ConstraintLayout.LayoutParams paramll = new ConstraintLayout.LayoutParams
-                                            (ConstraintLayout.LayoutParams.FILL_PARENT, ConstraintLayout.LayoutParams.FILL_PARENT);
-                                    addContentView(ll, paramll);
-
-                                    ImageView backBtn = ll.findViewById(R.id.backBtn);
-
-                                    backBtn.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            //중첩 레이아웃 삭제하기
-                                            ((ViewManager) ll.getParent()).removeView(ll);
-                                            profile_text.setVisibility(View.VISIBLE);
-                                            profile_logo.setVisibility(View.VISIBLE);
-                                            profile_update.setVisibility(View.VISIBLE);
-                                            nextBtn.setEnabled(true);
-                                        }
-                                    });
-
-                                    //회원정보 수정 페이지로 이동
-                                    ImageView updateBtn = ll.findViewById(R.id.updateBtn);
-                                    updateBtn.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            //중첩 레이아웃 삭제하기
-                                            ((ViewManager) ll.getParent()).removeView(ll);
-                                            profile_text.setVisibility(View.VISIBLE);
-                                            profile_logo.setVisibility(View.VISIBLE);
-                                            profile_update.setVisibility(View.VISIBLE);
-                                            nextBtn.setEnabled(true);
-                                            Intent intent = new Intent(Profile.this, ProfileUpdate.class);
-                                            intent.putExtra("nickname", nickname);
-                                            startActivity(intent);
-
-                                        }
-                                    });
                                 }
                             }
                         }

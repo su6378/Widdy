@@ -31,7 +31,7 @@
                 android:layout_height="50dp"
                 android:elevation="10dp"
                 android:src="@drawable/ic_playing"
-                android:tint="@color/blue"
+                android:tint="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="@id/playing_image"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
