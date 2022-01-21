@@ -237,6 +237,7 @@ public class Profile extends AppCompatActivity {
                             //위디 메인페이지로 이동
                             Intent intent = new Intent(Profile.this, Main.class);
                             startActivity(intent);
+                            finish();
                         }
                     }
                 }

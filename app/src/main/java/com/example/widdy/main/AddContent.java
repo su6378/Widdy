@@ -1,8 +1,14 @@
 package com.example.widdy.main;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -13,15 +19,28 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.widdy.R;
+import com.example.widdy.profile.ProfileEtc;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -34,6 +53,7 @@ public class AddContent extends Fragment {
 
     private NestedScrollView add_scrollview;
     private RecyclerView add_recyclerView;
+    private ImageView add_profile;
 
     private MovieAdapter movieAdapter = new MovieAdapter();
 
@@ -70,12 +90,12 @@ public class AddContent extends Fragment {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String id = document.getId();
-                        String title = document.getString("title");
 
                         title_id = document.getId();
 
                         data.add(new MovieItem(id,
-                                "action", title, "this movie open in 2018.01"));
+                                "action", id, "this movie open in 2018.01"));
+
 
                     }
                     add_recyclerView.setAdapter(movieAdapter);
@@ -89,8 +109,19 @@ public class AddContent extends Fragment {
             }
         });
 
+        //프로필 기타 페이지로 이동
+        add_profile = view.findViewById(R.id.add_profile);
+
+        add_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ProfileEtc.class);
+                startActivity(intent);
+            }
+        });
 
 
         return view;
     }
+
 }

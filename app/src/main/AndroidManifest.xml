@@ -14,9 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Widdy">
         <activity
-            android:name=".profile.ProfileManage"
+            android:name=".Search"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".profile.ProfileManage"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".profile.ProfileEtc"
             android:exported="true"

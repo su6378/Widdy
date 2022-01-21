@@ -39,6 +39,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.widdy.R;
+import com.example.widdy.Search;
 import com.example.widdy.profile.Profile;
 import com.example.widdy.profile.ProfileEtc;
 import com.example.widdy.profile.ProfileUpdate;
@@ -66,7 +67,7 @@ import java.util.Map;
 
 public class Home extends Fragment {
 
-    private ImageView home_image, info_image, info_cancel, home_ic_add,info_ic_add,home_profile;
+    private ImageView home_image, info_image, info_cancel, home_ic_add,info_ic_add,home_profile,home_search;
     private TextView home_nickname, info_title, info_day, info_content, home_image_id;
     private ConstraintLayout home_playBtn, info_bottom_sheet, bottom_layout, home_ic_infoLayout, info_playBtn, home_ic_addLayout,info_saveLayout;
     private ProgressBar bottom_progressbar, main_progressbar;
@@ -111,7 +112,10 @@ public class Home extends Fragment {
         home_image = view.findViewById(R.id.home_image);
         home_image_id = view.findViewById(R.id.home_image_id);
         main_progressbar = view.findViewById(R.id.main_progressbar);
+
+        //앱바
         home_profile = view.findViewById(R.id.home_profile);
+        home_search = view.findViewById(R.id.home_search);
 
         //찜한 콘텐츠
         home_ic_addLayout = view.findViewById(R.id.home_ic_addLayout);
@@ -148,6 +152,16 @@ public class Home extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ProfileEtc.class);
                 startActivity(intent);
+            }
+        });
+
+        //검색 아이콘 클릭 시
+        home_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Search.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition( R.anim.slide_left_in, R.anim.slide_left_out );
             }
         });
 
