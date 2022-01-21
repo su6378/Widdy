@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".Search">
+    tools:context=".main.Search">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/search_appbar"
@@ -200,7 +200,7 @@
         android:background="@drawable/round_up_rectangle"
         android:backgroundTint="@color/lightblack"
         android:elevation="10dp"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ProgressBar
@@ -218,7 +218,7 @@
             android:id="@+id/bottom_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible">
+            android:visibility="invisible">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/info_imageLayout"

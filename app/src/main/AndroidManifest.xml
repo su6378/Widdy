@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Widdy">
         <activity
-            android:name=".Search"
+            android:name=".main.Search"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
@@ -46,7 +46,7 @@
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".LogIn"
+            android:name=".begin.LogIn"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -58,7 +58,7 @@
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Splash"
+            android:name=".begin.Splash"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

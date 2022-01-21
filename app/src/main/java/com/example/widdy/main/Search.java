@@ -1,14 +1,14 @@
-package com.example.widdy;
+package com.example.widdy.main;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -29,12 +29,12 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.example.widdy.main.MovieAdapter;
-import com.example.widdy.main.MovieItem;
+import com.example.widdy.R;
 import com.example.widdy.profile.ProfileEtc;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -64,7 +64,7 @@ public class Search extends AppCompatActivity {
     private FirebaseFirestore fStore;
 
     //바텀시트
-    private ImageView info_image,info_ic_add;
+    private ImageView info_image,info_ic_add,info_cancel;
     private ConstraintLayout info_bottom_sheet,bottom_layout,info_playBtn,info_addLayout;
     private TextView info_title,info_day,info_content;
     private ProgressBar bottom_progressbar;
@@ -167,8 +167,40 @@ public class Search extends AppCompatActivity {
         bottom_progressbar = findViewById(R.id.bottom_progressbar);
         info_imageLayout = findViewById(R.id.info_imageLayout);
         info_playBtn = findViewById(R.id.info_playBtn);
-        info_addLayout = findViewById(R.id.info_saveLayout);
+        info_addLayout = findViewById(R.id.info_addLayout);
         info_ic_add = findViewById(R.id.info_ic_add);
+
+        //정보창 닫기 버튼
+        info_cancel = findViewById(R.id.info_cancel);
+        info_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                info_bottom_sheet.setVisibility(View.INVISIBLE);
+                bottom_layout.setVisibility(View.INVISIBLE);
+                bottom_progressbar.setVisibility(View.INVISIBLE);
+
+                //뒤에 터치 해제
+                info_bottom_sheet.setClickable(false);
+
+            }
+        });
+
+        //바텀시트 재생 버튼 클릭시
+        info_playBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isPlay();
+            }
+        });
+
+        //바텀시트 찜하기 버튼 클릭시
+        info_addLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isAdd(info_ic_add);
+            }
+        });
 
     }
 
@@ -206,10 +238,11 @@ public class Search extends AppCompatActivity {
                     search_recyclerView.setAdapter(movieAdapter);
                     //아이템 로드
                     movieAdapter.setItems(movie);
+
                 }
             }
         });
-        /*//포스터 클릭시 id값을 변경하고 메소드 실행
+        //포스터 클릭시 id값을 변경하고 메소드 실행
         movieAdapter.setItemClickListener(new MovieAdapter.OnItemClickListner() {
             @Override
             public void OnItemClick(MovieAdapter.ViewHolder holder, View view, int position) {
@@ -251,7 +284,7 @@ public class Search extends AppCompatActivity {
                     });
                 }
             }
-        });*/
+        });
     }
 
     //정보 버튼 클릭시
@@ -262,7 +295,6 @@ public class Search extends AppCompatActivity {
 
         info_bottom_sheet.setVisibility(View.VISIBLE);
         bottom_progressbar.setVisibility(View.VISIBLE);
-        //info_bottom_sheet.startAnimation(animSlideUp);
 
 
         //제목 불러오기
@@ -286,7 +318,7 @@ public class Search extends AppCompatActivity {
                         storageRef.child("movie/" + id + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Glide.with(getActivity()).load(uri).centerCrop().listener(new RequestListener<Drawable>() {
+                                Glide.with(Search.this).load(uri).centerCrop().listener(new RequestListener<Drawable>() {
                                     @Override
                                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                                         Log.d("테스트", "실패");
@@ -297,7 +329,6 @@ public class Search extends AppCompatActivity {
                                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                                         bottom_layout.setVisibility(View.VISIBLE);
                                         bottom_progressbar.setVisibility(View.INVISIBLE);
-                                        //info_bottom_sheet.clearAnimation();
                                         return false;
                                     }
                                 }).into(info_image);
@@ -336,5 +367,160 @@ public class Search extends AppCompatActivity {
             }
         });
     }
+
+    //재생했는지 안했는지 판단 메소드
+    private void isPlay() {
+        fStore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+
+
+        fStore.collection("user").document(currentUser.getEmail()).collection("movie").document(title_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        if (document.getBoolean("isPlay") == false || document.getBoolean("isPlay") == null) {
+                            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(Search.this, R.style.MyAlertDialogStyle);
+
+                            builder.setTitle("재생")
+                                    .setMessage("\n영상을 시청하시겠습니까?")
+
+                                    .setCancelable(false)
+
+                                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+                                        public void onClick(DialogInterface dialog, int id) {
+
+                                            fStore = FirebaseFirestore.getInstance();
+                                            mAuth = FirebaseAuth.getInstance();
+                                            currentUser = mAuth.getCurrentUser();
+
+                                            DocumentReference documentReference = fStore.collection("user").document(currentUser.getEmail()).collection("movie")
+                                                    .document(title_id);
+
+                                            Map<String, Object> user = new HashMap<>();
+                                            user.put("isPlay", true);
+
+                                            documentReference.set(user, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                    }).setNegativeButton("취소", null).show();
+                        } else if (document.getBoolean("isPlay") == true) {
+                            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(Search.this, R.style.MyAlertDialogStyle);
+
+                            builder.setTitle("재생완료")
+                                    .setMessage("\n영상을 시청을 취소하시겠습니까?")
+
+                                    .setCancelable(false)
+
+                                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+                                        public void onClick(DialogInterface dialog, int id) {
+
+                                            fStore = FirebaseFirestore.getInstance();
+                                            mAuth = FirebaseAuth.getInstance();
+                                            currentUser = mAuth.getCurrentUser();
+
+                                            DocumentReference documentReference = fStore.collection("user").document(currentUser.getEmail()).collection("movie")
+                                                    .document(title_id);
+
+                                            Map<String, Object> user = new HashMap<>();
+                                            user.put("isPlay", false);
+
+                                            documentReference.set(user, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }).setNegativeButton("취소", null).show();
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    //찜했는지 안했는지 판단 메소드
+    private void isAdd(ImageView imageview) {
+        fStore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+
+        fStore.collection("user").document(currentUser.getEmail()).collection("movie").document(title_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        //찜한 적이 없으면 값 추가
+                        if(document.getBoolean("isAdd") == null){
+                            DocumentReference documentReference = fStore.collection("user").document(currentUser.getEmail()).collection("movie")
+                                    .document(title_id);
+
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("isAdd", true);
+
+                            documentReference.set(user, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        //+ 이미지로 변경
+                                        imageview.setImageResource(R.drawable.ic_check);
+                                    }
+                                }
+                            });
+                        }
+                        //찜했을 때는 취소로 변경
+                        else if (document.getBoolean("isAdd") == true) {
+                            DocumentReference documentReference = fStore.collection("user").document(currentUser.getEmail()).collection("movie")
+                                    .document(title_id);
+
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("isAdd", false);
+
+                            documentReference.set(user, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        //+ 이미지로 변경
+                                        imageview.setImageResource(R.drawable.ic_add);
+                                    }
+                                }
+                            });
+                        } else if((document.getBoolean("isAdd") == false)) {
+                            //찜한 상태가 아니면 반대로 찜한 목록에 추가
+                            DocumentReference documentReference = fStore.collection("user").document(currentUser.getEmail()).collection("movie")
+                                    .document(title_id);
+
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("isAdd", true);
+
+                            documentReference.set(user, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        //체크 이미지로 변경
+                                        imageview.setImageResource(R.drawable.ic_check);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        });
+    }
+
 
 }

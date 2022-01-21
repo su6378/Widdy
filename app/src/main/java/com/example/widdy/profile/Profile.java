@@ -82,13 +82,6 @@ public class Profile extends AppCompatActivity {
 
     }
 
-    //닉네임 초기화
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initData();
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +100,9 @@ public class Profile extends AppCompatActivity {
         add_profile = findViewById(R.id.add_profile);
         profile_image = findViewById(R.id.profile_image);
         profile_nickname = findViewById(R.id.profile_nickname);
+
+        //데이터 초기화
+        initData();
 
 
         //프로필 생성 or 변경 or 메인 페이지 이동
@@ -155,6 +151,12 @@ public class Profile extends AppCompatActivity {
 
 
     }
+    //닉네임 초기화
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
 
     private void initData() {
 
@@ -164,7 +166,6 @@ public class Profile extends AppCompatActivity {
 
         //progressbar 띄우기
         profile_page.setVisibility(View.INVISIBLE);
-        profile_progress.setVisibility(View.VISIBLE);
 
 
         fStore.collection("user").document(currentUser.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -182,6 +183,9 @@ public class Profile extends AppCompatActivity {
                             add_profile.setVisibility(View.VISIBLE);
                             profile_image.setVisibility(View.INVISIBLE);
                         } else {
+                            //프로필 이름 반영
+                            profile_nickname.setText(nickname);
+                            profile_nickname.setTextColor(Color.parseColor("#FFFFFF"));
 
                             //썸네일 불러오기
                             FirebaseStorage storage = FirebaseStorage.getInstance("gs://widdy-3d0ed.appspot.com");
@@ -200,10 +204,7 @@ public class Profile extends AppCompatActivity {
                                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                                             add_profile.setVisibility(View.INVISIBLE);
                                             profile_image.setVisibility(View.VISIBLE);
-                                            profile_nickname.setText(nickname);
-                                            profile_nickname.setTextColor(Color.parseColor("#FFFFFF"));
                                             profile_page.setVisibility(View.VISIBLE);
-                                            profile_progress.setVisibility(View.INVISIBLE);
                                             return false;
                                         }
                                     }).into(profile_image);

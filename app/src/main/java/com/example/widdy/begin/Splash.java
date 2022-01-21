@@ -1,4 +1,4 @@
-package com.example.widdy;
+package com.example.widdy.begin;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.widdy.begin.Begin;
+import com.example.widdy.R;
 
 public class Splash extends AppCompatActivity {
 

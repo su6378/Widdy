@@ -13,7 +13,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.widdy.profile.Profile;
-import com.example.widdy.LogIn;
 import com.example.widdy.R;
 import com.example.widdy.register.Register;
 import com.google.firebase.auth.FirebaseAuth;

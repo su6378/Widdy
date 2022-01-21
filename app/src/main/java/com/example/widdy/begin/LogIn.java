@@ -1,4 +1,4 @@
-package com.example.widdy;
+package com.example.widdy.begin;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.widdy.begin.Begin;
+import com.example.widdy.R;
 import com.example.widdy.profile.Profile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

@@ -12,7 +12,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
@@ -22,7 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.widdy.profile.Profile;
-import com.example.widdy.LogIn;
+import com.example.widdy.begin.LogIn;
 import com.example.widdy.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
