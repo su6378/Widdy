@@ -39,6 +39,7 @@ public class ProfileEtc extends AppCompatActivity {
         Intent intent = new Intent();
         setResult(RESULT_OK, intent);
         finish();
+        overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
     }
     //닉네임 초기화
     @Override
@@ -77,6 +78,7 @@ public class ProfileEtc extends AppCompatActivity {
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
                 finish();
+                overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
             }
         });
 

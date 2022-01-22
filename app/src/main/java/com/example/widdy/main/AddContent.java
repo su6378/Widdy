@@ -53,7 +53,7 @@ public class AddContent extends Fragment {
 
     private NestedScrollView add_scrollview;
     private RecyclerView add_recyclerView;
-    private ImageView add_profile;
+    private ImageView add_profile, add_search,add_filter;
 
     private MovieAdapter movieAdapter = new MovieAdapter();
 
@@ -82,9 +82,9 @@ public class AddContent extends Fragment {
         ArrayList<MovieItem> data = new ArrayList<>();
         MovieAdapter movieAdapter = new MovieAdapter();
 
-        add_recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
+        add_recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
 
-        fStore.collection("user").document(currentUser.getEmail()).collection("movie").whereEqualTo("isAdd",true).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        fStore.collection("user").document(currentUser.getEmail()).collection("movie").whereEqualTo("isAdd", true).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -117,6 +117,31 @@ public class AddContent extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ProfileEtc.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_left_in,R.anim.slide_left_out);
+            }
+        });
+
+
+        //검색페이지로 이동
+        add_search = view.findViewById(R.id.add_search);
+        add_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //검색 아이콘 클릭 시
+                Intent intent = new Intent(getActivity(), Search.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
+            }
+        });
+
+        //필터페이지로 이동
+        add_filter = view.findViewById(R.id.add_filter);
+        add_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),Filter.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
             }
         });
 

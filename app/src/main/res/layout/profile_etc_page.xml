@@ -24,14 +24,16 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/backBtn"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
+                    android:padding="5dp"
                     android:src="@drawable/ic_back"
                     android:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -124,37 +126,40 @@
                     android:src="@drawable/ic_message"
                     android:tint="@color/white"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toRightOf="@id/etc_ic_message"
                     android:layout_marginLeft="10dp"
-                    app:layout_constraintTop_toTopOf="@id/etc_ic_message"
                     android:text="친구들에게 위디를 소개해 보세요."
                     android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@id/etc_ic_message"
+                    app:layout_constraintTop_toTopOf="@id/etc_ic_message" />
+
                 <TextView
                     android:id="@+id/etc_introduce_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/etc_ic_message"
-                    app:layout_constraintLeft_toLeftOf="@id/etc_ic_message"
                     android:layout_marginTop="10dp"
                     android:text="좋아하는 시리즈와 영화에 대해 친구들과 이야기를 나누고\n싶으신가요? 그럼 이 링크를 공유해보세요."
+                    android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:textColor="@color/white"/>
+                    app:layout_constraintLeft_toLeftOf="@id/etc_ic_message"
+                    app:layout_constraintTop_toBottomOf="@id/etc_ic_message" />
+
                 <TextView
                     android:id="@+id/etc_use"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/etc_introduce_comment"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginVertical="10dp"
-                    app:layout_constraintLeft_toLeftOf="@id/etc_introduce_comment"
                     android:text="이용 약관"
-                    android:textColor="@color/gray"/>
+                    android:textColor="@color/gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@id/etc_introduce_comment"
+                    app:layout_constraintTop_toBottomOf="@id/etc_introduce_comment" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -162,129 +167,130 @@
                 android:id="@+id/etc_shareLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/etc_introduceLayout"
+                android:layout_marginTop="20dp"
                 android:background="@color/lightblack"
-                android:layout_marginTop="20dp">
+                app:layout_constraintTop_toBottomOf="@id/etc_introduceLayout">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/baseline1"
                     android:layout_width="1dp"
                     android:layout_height="60dp"
-                    android:background="@color/lightgray"
                     android:layout_marginVertical="10dp"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@color/lightgray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/baseline2"/>
+                    app:layout_constraintRight_toLeftOf="@id/baseline2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/baseline2"
                     android:layout_width="1dp"
                     android:layout_height="60dp"
-                    android:background="@color/lightgray"
                     android:layout_marginVertical="10dp"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@color/lightgray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/baseline1"
-                    app:layout_constraintRight_toLeftOf="@id/baseline3"/>
+                    app:layout_constraintRight_toLeftOf="@id/baseline3"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/baseline3"
                     android:layout_width="1dp"
                     android:layout_height="60dp"
-                    android:background="@color/lightgray"
                     android:layout_marginVertical="10dp"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@color/lightgray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/baseline2"
-                    app:layout_constraintRight_toRightOf="parent"/>
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/etc_kakao"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_marginBottom="20dp"
                     android:src="@drawable/ic_kakao"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/baseline1"
-                    app:layout_constraintRight_toLeftOf="@id/baseline1"
                     app:layout_constraintBottom_toBottomOf="@id/baseline1"
-                    android:layout_marginBottom="20dp"/>
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/baseline1"
+                    app:layout_constraintTop_toTopOf="@id/baseline1" />
+
                 <TextView
                     android:id="@+id/etc_kakao_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="@id/etc_kakao"
-                    app:layout_constraintRight_toRightOf="@id/etc_kakao"
-                    app:layout_constraintTop_toBottomOf="@id/etc_kakao"
                     android:text="카카오톡"
                     android:textColor="@color/white"
-                    />
+                    app:layout_constraintLeft_toLeftOf="@id/etc_kakao"
+                    app:layout_constraintRight_toRightOf="@id/etc_kakao"
+                    app:layout_constraintTop_toBottomOf="@id/etc_kakao" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/etc_facebook"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/ic_facebook"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/round_rectangle"
-                    app:layout_constraintLeft_toLeftOf="@id/baseline1"
-                    app:layout_constraintTop_toTopOf="@id/baseline1"
-                    app:layout_constraintRight_toLeftOf="@id/baseline2"
+                    android:src="@drawable/ic_facebook"
                     app:layout_constraintBottom_toBottomOf="@id/baseline1"
-                    android:layout_marginBottom="20dp"/>
+                    app:layout_constraintLeft_toLeftOf="@id/baseline1"
+                    app:layout_constraintRight_toLeftOf="@id/baseline2"
+                    app:layout_constraintTop_toTopOf="@id/baseline1" />
+
                 <TextView
                     android:id="@+id/etc_facebook_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="@id/etc_facebook"
-                    app:layout_constraintRight_toRightOf="@id/etc_facebook"
-                    app:layout_constraintTop_toBottomOf="@id/etc_facebook"
                     android:text="Facebook"
                     android:textColor="@color/white"
-                    />
+                    app:layout_constraintLeft_toLeftOf="@id/etc_facebook"
+                    app:layout_constraintRight_toRightOf="@id/etc_facebook"
+                    app:layout_constraintTop_toBottomOf="@id/etc_facebook" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/etc_gmail"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/ic_gmail"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/round_rectangle"
-                    app:layout_constraintLeft_toLeftOf="@id/baseline2"
-                    app:layout_constraintTop_toTopOf="@id/baseline1"
-                    app:layout_constraintRight_toLeftOf="@id/baseline3"
+                    android:src="@drawable/ic_gmail"
                     app:layout_constraintBottom_toBottomOf="@id/baseline1"
-                    android:layout_marginBottom="20dp"/>
+                    app:layout_constraintLeft_toLeftOf="@id/baseline2"
+                    app:layout_constraintRight_toLeftOf="@id/baseline3"
+                    app:layout_constraintTop_toTopOf="@id/baseline1" />
+
                 <TextView
                     android:id="@+id/etc_gmail_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="@id/etc_gmail"
-                    app:layout_constraintRight_toRightOf="@id/etc_gmail"
-                    app:layout_constraintTop_toBottomOf="@id/etc_gmail"
                     android:text="Gmail"
                     android:textColor="@color/white"
-                    />
+                    app:layout_constraintLeft_toLeftOf="@id/etc_gmail"
+                    app:layout_constraintRight_toRightOf="@id/etc_gmail"
+                    app:layout_constraintTop_toBottomOf="@id/etc_gmail" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/etc_more"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_marginBottom="20dp"
                     android:src="@drawable/ic_more_item"
                     android:tint="@color/white"
-                    app:layout_constraintLeft_toLeftOf="@id/baseline3"
-                    app:layout_constraintTop_toTopOf="@id/baseline1"
-                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintBottom_toBottomOf="@id/baseline1"
-                    android:layout_marginBottom="20dp"/>
+                    app:layout_constraintLeft_toLeftOf="@id/baseline3"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/baseline1" />
+
                 <TextView
                     android:id="@+id/etc_more_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="@id/etc_more"
-                    app:layout_constraintRight_toRightOf="@id/etc_more"
-                    app:layout_constraintTop_toBottomOf="@id/etc_more"
                     android:text="더 보기"
                     android:textColor="@color/white"
-                    />
+                    app:layout_constraintLeft_toLeftOf="@id/etc_more"
+                    app:layout_constraintRight_toRightOf="@id/etc_more"
+                    app:layout_constraintTop_toBottomOf="@id/etc_more" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -292,56 +298,56 @@
                 android:id="@+id/etc_appsetting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/etc_shareLayout"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/white"
                 android:text="앱 설정"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="10dp"/>
+                app:layout_constraintTop_toBottomOf="@id/etc_shareLayout" />
 
             <TextView
                 android:id="@+id/etc_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/etc_appsetting"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="25dp"
-                android:textColor="@color/white"
                 android:text="계정"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="10dp"/>
+                app:layout_constraintTop_toBottomOf="@id/etc_appsetting" />
 
             <TextView
                 android:id="@+id/etc_customercenter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/etc_account"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="25dp"
-                android:textColor="@color/white"
                 android:text="고객센터"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="10dp"/>
+                app:layout_constraintTop_toBottomOf="@id/etc_account" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/logoutBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/etc_customercenter"
                 android:layout_marginTop="15dp"
-                >
+                app:layout_constraintTop_toBottomOf="@id/etc_customercenter">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:textColor="@color/white"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginLeft="10dp"
                     android:text="로그아웃"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginVertical="10dp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    android:layout_marginLeft="10dp"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -349,7 +355,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
