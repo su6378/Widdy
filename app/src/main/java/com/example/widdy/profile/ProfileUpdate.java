@@ -79,6 +79,7 @@ public class ProfileUpdate extends AppCompatActivity {
                                                 Intent intent = new Intent();
                                                 setResult(RESULT_OK, intent);
                                                 finish();
+                                                overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
                                             }
                                         }
                                     }
@@ -261,6 +262,7 @@ public class ProfileUpdate extends AppCompatActivity {
                                                         Intent intent = new Intent();
                                                         setResult(RESULT_OK, intent);
                                                         finish();
+                                                        overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
                                                     }
                                                 }
                                             }

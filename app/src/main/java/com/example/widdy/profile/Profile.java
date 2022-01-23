@@ -118,11 +118,10 @@ public class Profile extends AppCompatActivity {
 
         //프로필 변경
         profile_update = findViewById(R.id.profile_update);
-        profile_updateLayout = findViewById(R.id.profile_updateLayout);
         profile_text = findViewById(R.id.profile_text);
         profile_logo = findViewById(R.id.profile_logo);
 
-        profile_updateLayout.setOnClickListener(new View.OnClickListener() {
+        profile_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fStore.collection("user").document(currentUser.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -139,7 +138,9 @@ public class Profile extends AppCompatActivity {
                                     //회원정보 관리 페이지로 이동
                                     Intent intent = new Intent(Profile.this, ProfileManage.class);
                                     intent.putExtra("nickname", nickname);
+                                    overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
                                     startActivity(intent);
+
 
                                 }
                             }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -35,6 +36,7 @@ public class ProfileManage extends AppCompatActivity {
         Intent intent = new Intent();
         setResult(RESULT_OK, intent);
         finish();
+        overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
     }
 
 
@@ -43,6 +45,9 @@ public class ProfileManage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_manage_page);
+
+        //하단바 색깔 적용
+        getWindow().setNavigationBarColor(Color.parseColor("#282828"));
 
         //Firebase
         fStore = FirebaseFirestore.getInstance();
@@ -59,6 +64,7 @@ public class ProfileManage extends AppCompatActivity {
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
                 finish();
+                overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
             }
         });
 
@@ -78,6 +84,7 @@ public class ProfileManage extends AppCompatActivity {
                 Intent intent = new Intent(ProfileManage.this,ProfileUpdate.class);
                 intent.putExtra("nickname",nickname);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
             }
         });
 
@@ -90,7 +97,7 @@ public class ProfileManage extends AppCompatActivity {
     }
 
     private void initData(){
-        profile_manage_page.setVisibility(View.INVISIBLE);
+        //profile_manage_page.setVisibility(View.INVISIBLE);
 
         //Firebase
         fStore = FirebaseFirestore.getInstance();
@@ -106,7 +113,7 @@ public class ProfileManage extends AppCompatActivity {
                     if(document.exists()){
                         nickname = document.getString("nickname");
                         profile_manage_nickname.setText(nickname);
-                        profile_manage_page.setVisibility(View.VISIBLE);
+                        //profile_manage_page.setVisibility(View.VISIBLE);
                     }
                 }
             }

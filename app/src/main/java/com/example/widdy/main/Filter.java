@@ -67,6 +67,10 @@ public class Filter extends AppCompatActivity {
     private ProgressBar bottom_progressbar;
     private CardView info_imageLayout;
 
+    //필터
+    private ConstraintLayout filter_layout;
+    private TextView filter_cancelBtn,filter_clearBtn;
+
     //뒤로가기 버튼
     @Override
     public void onBackPressed() {
@@ -134,6 +138,27 @@ public class Filter extends AppCompatActivity {
         //위디 콘텐츠
         filter_scrollview = findViewById(R.id.filter_scrollview);
         filter_recyclerView = findViewById(R.id.filter_recyclerView);
+
+        //필터
+        filter_layout = findViewById(R.id.filter_layout);
+        filter_cancelBtn = findViewById(R.id.filter_cancelBtn);
+        filter_clearBtn = findViewById(R.id.filter_clearBtn);
+
+        //취소 버튼 클릭 시
+        filter_cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                filter_layout.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        //지우기 버튼 클릭 시
+        filter_clearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         //바텀시트
         info_image = findViewById(R.id.info_image);
