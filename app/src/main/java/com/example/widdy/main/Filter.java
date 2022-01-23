@@ -31,6 +31,7 @@ import com.example.widdy.profile.ProfileEtc;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -68,8 +69,10 @@ public class Filter extends AppCompatActivity {
     private CardView info_imageLayout;
 
     //필터
-    private ConstraintLayout filter_layout;
+    private ConstraintLayout filter_layout,viewer_kidsLayout;
     private TextView filter_cancelBtn,filter_clearBtn;
+    private String viewer;
+    private MaterialCheckBox kids_check;
 
     //뒤로가기 버튼
     @Override
@@ -157,6 +160,25 @@ public class Filter extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+            }
+        });
+
+        //시청자
+        viewer_kidsLayout = findViewById(R.id.viewer_kidsLayout);
+        kids_check = findViewById(R.id.kids_check);
+
+        //어린이 레이아웃 클릭 시
+        viewer_kidsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               if(kids_check.isChecked() == false){
+                   viewer = "kids";
+                   kids_check.setChecked(true);
+               }else{
+                   viewer = "no";
+                   kids_check.setChecked(false);
+               }
+               Log.d("테스트",viewer);
             }
         });
 
