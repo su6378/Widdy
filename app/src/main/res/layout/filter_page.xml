@@ -28,14 +28,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@id/backBtn"
             android:layout_marginLeft="30dp"
             android:text="필터"
             android:textColor="@color/white"
+            android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="@id/backBtn"
             app:layout_constraintBottom_toBottomOf="@id/backBtn"
-            android:textSize="20sp"/>
+            app:layout_constraintLeft_toRightOf="@id/backBtn"
+            app:layout_constraintTop_toTopOf="@id/backBtn" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/filter_profile"
@@ -60,122 +60,220 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/filter_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="-10dp"
-        app:layout_constraintTop_toBottomOf="@id/filter_appbar"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/round_up_rectangle"
         android:backgroundTint="@color/darkGray"
         android:clickable="true"
-        android:elevation="10dp">
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filter_appbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/filter_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/round_rectangle"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
-                android:id="@+id/filter_cancelBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingVertical="10dp"
-                android:paddingHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="취소"
-                android:textStyle="bold"
-                android:background="?attr/selectableItemBackground"
-                android:textColor="@color/white"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/filter_cancelBtn"
-                app:layout_constraintBottom_toBottomOf="@id/filter_cancelBtn"
-                android:text="필터"
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/filter_clearBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingVertical="10dp"
-                android:paddingHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="지우기"
-                android:textStyle="bold"
-                android:background="?attr/selectableItemBackground"
-                android:textColor="@color/white"
-                android:textSize="16sp"/>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/filter_top_line"
+                android:id="@+id/filterAdaptBtn"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/gray"
-                app:layout_constraintTop_toBottomOf="@id/filter_cancelBtn"/>
-
-            <TextView
-                android:id="@+id/filter_viewer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingVertical="15dp"
+                android:text="필터 적용"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@id/filter_top_line"
-                android:layout_marginTop="10dp"
-                android:text="시청자"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="15dp"/>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/viewer_kidsLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:clickable="true"
                 android:background="?attr/selectableItemBackground"
-                app:layout_constraintTop_toBottomOf="@id/filter_viewer"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="유아"
-                    android:textSize="18sp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginVertical="25dp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    android:layout_marginLeft="15dp"/>
-
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/kids_check"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:button="@color/transparent"
-                    android:background="@drawable/filter_checkbox"
-                    android:backgroundTint="@color/white"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginRight="20dp"
-                   />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.core.widget.NestedScrollView>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
 
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/filter_cancelBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="취소"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="필터"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/filter_cancelBtn"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/filter_cancelBtn" />
+
+                <TextView
+                    android:id="@+id/filter_clearBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="지우기"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/filter_top_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@id/filter_cancelBtn" />
+
+                <TextView
+                    android:id="@+id/filter_viewer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="시청자"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/filter_top_line" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/viewer_kidsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    app:layout_constraintTop_toBottomOf="@id/filter_viewer">
+
+                    <TextView
+                        android:id="@+id/kids_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:text="어린이"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/kids_check"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/filter_checkbox"
+                        android:backgroundTint="@color/white"
+                        android:button="@color/transparent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/viewer_adultsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    app:layout_constraintTop_toBottomOf="@id/viewer_kidsLayout">
+
+                    <TextView
+                        android:id="@+id/adults_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:text="일반"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/adults_check"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/filter_checkbox"
+                        android:backgroundTint="@color/white"
+                        android:button="@color/transparent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <HorizontalScrollView
+        android:id="@+id/filter_horizonLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filter_appbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/filter_horizon_recyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/black"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </RelativeLayout>
+
+
+    </HorizontalScrollView>
 
 
     <androidx.core.widget.NestedScrollView
@@ -183,7 +281,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filter_appbar">
+        app:layout_constraintTop_toBottomOf="@id/filter_horizonLayout">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -204,6 +302,52 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/oval_rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/filterBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ic_filter"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/ic_filter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/filter_text"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/filter_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="30dp"
+                android:text="필 터"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/ic_filter"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/info_bottom_sheet"
@@ -368,8 +512,8 @@
                     android:layout_height="30dp"
                     android:src="@drawable/ic_add"
                     android:tint="@color/white"
-                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView

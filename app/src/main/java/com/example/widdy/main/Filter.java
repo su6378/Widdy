@@ -69,10 +69,10 @@ public class Filter extends AppCompatActivity {
     private CardView info_imageLayout;
 
     //필터
-    private ConstraintLayout filter_layout,viewer_kidsLayout;
-    private TextView filter_cancelBtn,filter_clearBtn;
+    private ConstraintLayout viewer_kidsLayout,filterBtn,viewer_adultsLayout,filter_layout;;
+    private TextView filter_cancelBtn,filter_clearBtn,kids_text,adults_text,filterAdaptBtn;
     private String viewer;
-    private MaterialCheckBox kids_check;
+    private MaterialCheckBox kids_check,adults_check;
 
     //뒤로가기 버튼
     @Override
@@ -139,13 +139,15 @@ public class Filter extends AppCompatActivity {
 
 
         //위디 콘텐츠
-        filter_scrollview = findViewById(R.id.filter_scrollview);
         filter_recyclerView = findViewById(R.id.filter_recyclerView);
+        filter_scrollview = findViewById(R.id.filter_scrollview);
 
         //필터
         filter_layout = findViewById(R.id.filter_layout);
         filter_cancelBtn = findViewById(R.id.filter_cancelBtn);
         filter_clearBtn = findViewById(R.id.filter_clearBtn);
+        filterBtn = findViewById(R.id.filterBtn);
+        filterAdaptBtn = findViewById(R.id.filterAdaptBtn);
 
         //취소 버튼 클릭 시
         filter_cancelBtn.setOnClickListener(new View.OnClickListener() {
@@ -163,9 +165,29 @@ public class Filter extends AppCompatActivity {
             }
         });
 
+        //필터 적용 버튼 클릭 시
+        filterAdaptBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        //필터 버튼 클릭 시
+        filterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                filter_layout.setVisibility(View.VISIBLE);
+            }
+        });
+
         //시청자
         viewer_kidsLayout = findViewById(R.id.viewer_kidsLayout);
         kids_check = findViewById(R.id.kids_check);
+        kids_text = findViewById(R.id.kids_text);
+        viewer_adultsLayout = findViewById(R.id.viewer_adultsLayout);
+        adults_check = findViewById(R.id.adults_check);
+        adults_text = findViewById(R.id.adults_text);
 
         //어린이 레이아웃 클릭 시
         viewer_kidsLayout.setOnClickListener(new View.OnClickListener() {
@@ -174,11 +196,28 @@ public class Filter extends AppCompatActivity {
                if(kids_check.isChecked() == false){
                    viewer = "kids";
                    kids_check.setChecked(true);
+                   kids_text.setTextSize(20);
                }else{
                    viewer = "no";
                    kids_check.setChecked(false);
+                   kids_text.setTextSize(16);
                }
-               Log.d("테스트",viewer);
+            }
+        });
+
+        //일반 레이아웃 클릭 시
+        viewer_adultsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(adults_check.isChecked() == false){
+                    viewer = "kids";
+                    adults_check.setChecked(true);
+                    adults_text.setTextSize(20);
+                }else{
+                    viewer = "no";
+                    adults_check.setChecked(false);
+                    adults_text.setTextSize(16);
+                }
             }
         });
 
@@ -245,7 +284,6 @@ public class Filter extends AppCompatActivity {
                         String id = document.getId();
 
                         title_id = document.getId();
-
                         data.add(new MovieItem(id,
                                 "action", id, "this movie open in 2018.01"));
 
