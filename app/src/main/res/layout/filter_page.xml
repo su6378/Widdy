@@ -73,6 +73,7 @@
         app:layout_constraintTop_toBottomOf="@id/filter_appbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/filter_adaptLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
@@ -80,26 +81,37 @@
             android:background="@drawable/round_rectangle"
             app:layout_constraintBottom_toBottomOf="parent">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true" />
+
+
             <TextView
                 android:id="@+id/filterAdaptBtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingVertical="15dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:paddingVertical="10dp"
                 android:text="필터 적용"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:gravity="center"
-                android:clickable="true"
-                android:background="?attr/selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible">
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@id/filter_adaptLayout"
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -179,11 +191,11 @@
                         android:id="@+id/kids_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="20dp"
+                        android:layout_marginVertical="15dp"
                         android:layout_marginLeft="15dp"
                         android:text="어린이"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -213,11 +225,11 @@
                         android:id="@+id/adults_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="20dp"
+                        android:layout_marginVertical="15dp"
                         android:layout_marginLeft="15dp"
                         android:text="일반"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -234,6 +246,170 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/filter_middle_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@id/viewer_adultsLayout" />
+
+                <TextView
+                    android:id="@+id/filter_entertainment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="엔터테인먼트"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/filter_middle_line" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/entertainmentLayout"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    app:layout_constraintTop_toBottomOf="@id/filter_entertainment">
+
+                    <RadioGroup
+                        android:id="@+id/entertainment_radioGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:theme="@style/CustomRadioButton">
+
+                        <RadioButton
+                            android:id="@+id/entertainment_series"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
+                            android:paddingVertical="5dp"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:paddingRight="20dp"
+                            android:drawableRight="@drawable/abc_btn_radio_material"
+                            android:text="시리즈"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:background="?attr/selectableItemBackground"
+                             />
+
+                        <RadioButton
+                            android:id="@+id/entertainment_movie"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
+                            android:paddingVertical="5dp"
+                            android:button="@null"
+                            android:paddingRight="20dp"
+                            android:drawableRight="@drawable/abc_btn_radio_material"
+                            android:background="?attr/selectableItemBackground"
+                            android:text="영화"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            />
+                        <RadioButton
+                            android:id="@+id/entertainment_all"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
+                            android:paddingVertical="5dp"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:checked="true"
+                            android:paddingRight="20dp"
+                            android:drawableRight="@drawable/abc_btn_radio_material"
+                            android:text="전체"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:background="?attr/selectableItemBackground"
+                            />
+                    </RadioGroup>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/filter_bottom_line"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="2dp"
+                    android:background="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@id/entertainmentLayout" />
+
+                <TextView
+                    android:id="@+id/filter_original"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="표시"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/filter_bottom_line" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/originalLayout"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    app:layout_constraintTop_toBottomOf="@id/filter_original">
+
+                    <RadioGroup
+                        android:id="@+id/original_radioGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:theme="@style/CustomRadioButton">
+
+                        <RadioButton
+                            android:id="@+id/original_only"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
+                            android:paddingVertical="5dp"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:paddingRight="20dp"
+                            android:drawableRight="@drawable/abc_btn_radio_material"
+                            android:text="위디 오리지널만"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:background="?attr/selectableItemBackground"
+                            />
+
+                        <RadioButton
+                            android:id="@+id/original_all"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
+                            android:paddingVertical="5dp"
+                            android:button="@null"
+                            android:paddingRight="20dp"
+                            android:drawableRight="@drawable/abc_btn_radio_material"
+                            android:background="?attr/selectableItemBackground"
+                            android:text="위디의 모든 콘텐츠"
+                            android:checked="true"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            />
+                    </RadioGroup>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -416,7 +592,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2021"
-                android:textColor="@color/gray"
+                android:textColor="@color/lightgray"
                 android:textSize="16sp"
                 app:layout_constraintLeft_toLeftOf="@id/info_title"
                 app:layout_constraintTop_toBottomOf="@id/info_title" />

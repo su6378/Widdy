@@ -155,6 +155,7 @@ public class Home extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ProfileEtc.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
             }
         });
 
@@ -184,11 +185,8 @@ public class Home extends Fragment {
         home_playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //타이틀 id를 오징어게임으로 초기화
                 title_id = "squid_game";
-
-                //재생을 안했으면 재생하시겠습니까? dialog 재생을 했으면 재생을 취소하시겠습니까? dialog
                 isPlay();
             }
         });
@@ -291,6 +289,7 @@ public class Home extends Fragment {
         currentUser = mAuth.getCurrentUser();
 
         String main_id = "squid_game";
+        title_id = "squid_game";
 
         //홈 메인 이미지 적용
         //이미지 불러오기

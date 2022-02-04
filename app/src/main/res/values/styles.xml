@@ -110,4 +110,9 @@
 
     </style>
 
+    <style name="CustomRadioButton" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/lightgray</item>
+    </style>
+
 </resources>

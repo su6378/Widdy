@@ -17,8 +17,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,6 +47,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,7 +57,7 @@ public class Filter extends AppCompatActivity {
     private FirebaseUser currentUser;
     private FirebaseFirestore fStore;
 
-    private ImageView backBtn,filter_search,filter_profile;
+    private ImageView backBtn, filter_search, filter_profile;
     private NestedScrollView filter_scrollview;
     private RecyclerView filter_recyclerView;
 
@@ -62,17 +65,19 @@ public class Filter extends AppCompatActivity {
     private String title_id;
 
     //바텀시트
-    private ImageView info_image,info_ic_add,info_cancel;
-    private ConstraintLayout info_bottom_sheet,bottom_layout,info_playBtn,info_addLayout;
-    private TextView info_title,info_day,info_content;
+    private ImageView info_image, info_ic_add, info_cancel;
+    private ConstraintLayout info_bottom_sheet, bottom_layout, info_playBtn, info_addLayout;
+    private TextView info_title, info_day, info_content;
     private ProgressBar bottom_progressbar;
     private CardView info_imageLayout;
 
     //필터
-    private ConstraintLayout viewer_kidsLayout,filterBtn,viewer_adultsLayout,filter_layout;;
-    private TextView filter_cancelBtn,filter_clearBtn,kids_text,adults_text,filterAdaptBtn;
-    private String viewer;
-    private MaterialCheckBox kids_check,adults_check;
+    private ConstraintLayout viewer_kidsLayout, filterBtn, viewer_adultsLayout, filter_layout;
+    private TextView filter_cancelBtn, filter_clearBtn, kids_text, adults_text, filterAdaptBtn;
+    private String viewer, entertainment;
+    private boolean kids, adult,original;
+    private MaterialCheckBox kids_check, adults_check;
+    private RadioGroup entertainment_radioGroup,original_radioGroup;
 
     //뒤로가기 버튼
     @Override
@@ -120,7 +125,7 @@ public class Filter extends AppCompatActivity {
         filter_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Filter.this,Search.class);
+                Intent intent = new Intent(Filter.this, Search.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
             }
@@ -133,7 +138,7 @@ public class Filter extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Filter.this, ProfileEtc.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_left_in,R.anim.slide_left_out);
+                overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
             }
         });
 
@@ -161,7 +166,22 @@ public class Filter extends AppCompatActivity {
         filter_clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                adults_check.setChecked(false);
+                kids_check.setChecked(false);
+                viewerType();
+                entertainment_radioGroup.check(R.id.entertainment_all);
+                entertainment = "all";
+                original_radioGroup.check(R.id.original_all);
+                original = false;
+            }
+        });
 
+
+        //필터 버튼 클릭 시
+        filterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                filter_layout.setVisibility(View.VISIBLE);
             }
         });
 
@@ -169,15 +189,9 @@ public class Filter extends AppCompatActivity {
         filterAdaptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                filter_layout.setVisibility(View.INVISIBLE);
+                adaptData(viewer, entertainment,original);
 
-            }
-        });
-
-        //필터 버튼 클릭 시
-        filterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                filter_layout.setVisibility(View.VISIBLE);
             }
         });
 
@@ -188,20 +202,25 @@ public class Filter extends AppCompatActivity {
         viewer_adultsLayout = findViewById(R.id.viewer_adultsLayout);
         adults_check = findViewById(R.id.adults_check);
         adults_text = findViewById(R.id.adults_text);
+        adult = false;
+        kids = false;
+        viewer = "all";
 
         //어린이 레이아웃 클릭 시
         viewer_kidsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if(kids_check.isChecked() == false){
-                   viewer = "kids";
-                   kids_check.setChecked(true);
-                   kids_text.setTextSize(20);
-               }else{
-                   viewer = "no";
-                   kids_check.setChecked(false);
-                   kids_text.setTextSize(16);
-               }
+                if (kids_check.isChecked() == false) {
+                    kids = true;
+                    kids_check.setChecked(true);
+                    kids_text.setTextSize(18);
+                    viewerType();
+                } else {
+                    kids = false;
+                    kids_check.setChecked(false);
+                    kids_text.setTextSize(16);
+                    viewerType();
+                }
             }
         });
 
@@ -209,17 +228,61 @@ public class Filter extends AppCompatActivity {
         viewer_adultsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(adults_check.isChecked() == false){
-                    viewer = "kids";
+                if (adults_check.isChecked() == false) {
+                    adult = true;
                     adults_check.setChecked(true);
-                    adults_text.setTextSize(20);
-                }else{
-                    viewer = "no";
+                    adults_text.setTextSize(18);
+                    viewerType();
+                } else {
+                    adult = false;
                     adults_check.setChecked(false);
                     adults_text.setTextSize(16);
+                    viewerType();
                 }
             }
         });
+
+
+        //엔터테이먼트
+        entertainment_radioGroup = findViewById(R.id.entertainment_radioGroup);
+        entertainment = "all";
+        //엔터테인먼트 그룹 내 라디오 버튼 클릭 시
+        entertainment_radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i) {
+                    case R.id.entertainment_series:
+                        entertainment = "series";
+                        break;
+                    case R.id.entertainment_movie:
+                        entertainment = "movie";
+                        break;
+                    case R.id.entertainment_all:
+                        entertainment = "all";
+                        break;
+                }
+            }
+        });
+
+        //위디 오리지널
+        original_radioGroup = findViewById(R.id.original_radioGroup);
+        original = false;
+        //표시 그룹 내 라디오 버튼 클릭 시
+        original_radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i) {
+                    case R.id.original_only:
+                        original = true;
+                        break;
+                    case R.id.original_all:
+                        original = false;
+                        break;
+                }
+            }
+        });
+
+
 
         //바텀시트
         info_image = findViewById(R.id.info_image);
@@ -269,10 +332,11 @@ public class Filter extends AppCompatActivity {
 
     }
 
-    private void initData(){
+    private void initData() {
 
         ArrayList<MovieItem> data = new ArrayList<>();
         MovieAdapter movieAdapter = new MovieAdapter();
+
 
         filter_recyclerView.setLayoutManager(new GridLayoutManager(Filter.this, 3));
 
@@ -345,6 +409,7 @@ public class Filter extends AppCompatActivity {
         });
 
     }
+
     //정보 버튼 클릭시
     private void info() {
         fStore = FirebaseFirestore.getInstance();
@@ -407,10 +472,10 @@ public class Filter extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        if ( document.getBoolean("isAdd") == null) {
+                        if (document.getBoolean("isAdd") == null) {
                             //+ 이미지로 변경
                             info_ic_add.setImageResource(R.drawable.ic_add);
-                        }else if(document.getBoolean("isAdd") == false ) {
+                        } else if (document.getBoolean("isAdd") == false) {
                             //+ 이미지로 변경
                             info_ic_add.setImageResource(R.drawable.ic_add);
                         } else if (document.getBoolean("isAdd") == true) {
@@ -522,7 +587,7 @@ public class Filter extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         //찜한 적이 없으면 값 추가
-                        if(document.getBoolean("isAdd") == null){
+                        if (document.getBoolean("isAdd") == null) {
                             DocumentReference documentReference = fStore.collection("user").document(currentUser.getEmail()).collection("movie")
                                     .document(title_id);
 
@@ -556,7 +621,7 @@ public class Filter extends AppCompatActivity {
                                     }
                                 }
                             });
-                        } else if((document.getBoolean("isAdd") == false)) {
+                        } else if ((document.getBoolean("isAdd") == false)) {
                             //찜한 상태가 아니면 반대로 찜한 목록에 추가
                             DocumentReference documentReference = fStore.collection("user").document(currentUser.getEmail()).collection("movie")
                                     .document(title_id);
@@ -575,6 +640,199 @@ public class Filter extends AppCompatActivity {
                             });
                         }
                     }
+                }
+            }
+        });
+    }
+
+    //시청자 value 적용 메소드
+    private void viewerType() {
+        //kids와 adult 값에 따른 viewer type 정의
+        if (kids == false && adult == false) {
+            viewer = "all";
+        } else if (kids == true && adult == false) {
+            viewer = "kids";
+        } else if (kids == false && adult == true) {
+            viewer = "adult";
+        } else if (kids == true && adult == true) {
+            viewer = "all";
+        }
+    }
+
+    //필터 적용 메소드
+    private void adaptData(String viewerType, String entertainment,boolean isOriginal) {
+
+        ArrayList<MovieItem> data = new ArrayList<>();
+        MovieAdapter movieAdapter = new MovieAdapter();
+
+        filter_recyclerView.setLayoutManager(new GridLayoutManager(Filter.this, 3));
+
+        //시청자가 모든 시청자일 경우
+        if(viewer.equals("all")){
+            //모든 콘텐츠일 경우
+            if(original == false){
+                fStore.collection("video").whereEqualTo("allView",false).whereArrayContains("entertainment", entertainment).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String id = document.getId();
+                                title_id = document.getId();
+                                data.add(new MovieItem(id,
+                                        "action", id, "this movie open in 2018.01"));
+                            }
+                            filter_recyclerView.setAdapter(movieAdapter);
+                            filter_recyclerView.setClickable(false);
+                            //아이템 로드
+                            movieAdapter.setItems(data);
+                        }
+                    }
+                });
+                fStore.collection("video").whereEqualTo("allView",true).whereArrayContains("entertainment", entertainment).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String id = document.getId();
+                                title_id = document.getId();
+                                data.add(new MovieItem(id,
+                                        "action", id, "this movie open in 2018.01"));
+                            }
+                            filter_recyclerView.setAdapter(movieAdapter);
+                            filter_recyclerView.setClickable(false);
+                            //아이템 로드
+                            movieAdapter.setItems(data);
+                        }
+                    }
+                });
+            }//오리지널만 표시할 경우
+            else{
+                fStore.collection("video").whereEqualTo("allView",false).whereArrayContains("entertainment", entertainment).whereEqualTo("original",original).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String id = document.getId();
+                                title_id = document.getId();
+                                data.add(new MovieItem(id,
+                                        "action", id, "this movie open in 2018.01"));
+
+                            }
+                            filter_recyclerView.setAdapter(movieAdapter);
+                            filter_recyclerView.setClickable(false);
+                            //아이템 로드
+                            movieAdapter.setItems(data);
+                        }
+                    }
+                });
+                fStore.collection("video").whereEqualTo("viewer",viewer).whereEqualTo("allView",true).whereArrayContains("entertainment", entertainment).whereEqualTo("original",original).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String id = document.getId();
+                                title_id = document.getId();
+                                data.add(new MovieItem(id,
+                                        "action", id, "this movie open in 2018.01"));
+                            }
+                            filter_recyclerView.setAdapter(movieAdapter);
+                            filter_recyclerView.setClickable(false);
+                            //아이템 로드
+                            movieAdapter.setItems(data);
+                        }
+                    }
+                });
+            }
+
+            //kids나 adult일 경우
+        }else{
+            //모든 콘텐츠일 경우
+            if(original == false){
+                fStore.collection("video").whereEqualTo("viewer",viewerType).whereArrayContains("entertainment", entertainment).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String id = document.getId();
+                                title_id = document.getId();
+                                data.add(new MovieItem(id,
+                                        "action", id, "this movie open in 2018.01"));
+                            }
+                            filter_recyclerView.setAdapter(movieAdapter);
+                            filter_recyclerView.setClickable(false);
+                            //아이템 로드
+                            movieAdapter.setItems(data);
+                        }
+                    }
+                });
+            }//오리지널인 경우
+            else{
+                fStore.collection("video").whereEqualTo("viewer",viewerType).whereArrayContains("entertainment", entertainment).whereEqualTo("original",isOriginal).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String id = document.getId();
+
+                                title_id = document.getId();
+                                data.add(new MovieItem(id,
+                                        "action", id, "this movie open in 2018.01"));
+
+
+                            }
+                            filter_recyclerView.setAdapter(movieAdapter);
+                            filter_recyclerView.setClickable(false);
+
+                            //아이템 로드
+                            movieAdapter.setItems(data);
+
+
+                        }
+                    }
+                });
+            }
+        }
+
+        //포스터 클릭시 id값을 변경하고 메소드 실행
+        movieAdapter.setItemClickListener(new MovieAdapter.OnItemClickListner() {
+            @Override
+            public void OnItemClick(MovieAdapter.ViewHolder holder, View view, int position) {
+
+                //isPlay값이 없으면 추가하고 있으면 info 창 그대로 띄우기
+                if (view.getId() == R.id.movie_layout) {
+                    title_id = holder.movie_id.getText().toString();
+                    fStore.collection("user").document(currentUser.getEmail()).collection("movie").document(title_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                //값이 존재하면 그냥 창만 띄우기
+                                if (document.exists()) {
+                                    info();
+                                    //뒤에 화면 터치 막기기
+                                    info_bottom_sheet.setClickable(true);
+                                } else {
+                                    //user 콜렉션에 isPlay,isAdd값 추가
+                                    DocumentReference documentReference = fStore.collection("user").document(currentUser.getEmail()).collection("movie")
+                                            .document(title_id);
+
+                                    Map<String, Object> user = new HashMap<>();
+                                    user.put("isPlay", false);
+
+
+                                    documentReference.set(user, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                info();
+                                                info_bottom_sheet.setClickable(true);
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    });
                 }
             }
         });

@@ -52,7 +52,7 @@ import java.util.Map;
 
 public class Search extends AppCompatActivity {
 
-    private ImageView backBtn, search_profile;
+    private ImageView backBtn, search_profile,search_filter;
     private EditText search_editText;
     private ConstraintLayout search_filterBtn;
     private TextView search_alert;
@@ -115,11 +115,31 @@ public class Search extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Search.this, ProfileEtc.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_left_in,R.anim.slide_left_out);
+            }
+        });
+
+        //필터 아이콘 클릭 시
+        search_filter = findViewById(R.id.search_filter);
+        search_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Search.this, Filter.class);
+                startActivity(intent);
+                overridePendingTransition( R.anim.slide_left_in, R.anim.slide_left_out );
             }
         });
 
         //필터 이동 버튼
         search_filterBtn = findViewById(R.id.search_filterBtn);
+        search_filterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Search.this, Filter.class);
+                startActivity(intent);
+                overridePendingTransition( R.anim.slide_left_in, R.anim.slide_left_out );
+            }
+        });
 
         //비디오 검색
         search_editText = findViewById(R.id.search_editText);

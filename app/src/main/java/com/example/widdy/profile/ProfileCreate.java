@@ -120,6 +120,15 @@ public class ProfileCreate extends AppCompatActivity {
                     radio_error.setVisibility(View.VISIBLE);
                 }
                 else{
+                    //main content값 미리 넣기
+                    DocumentReference documentReference1 = fStore.collection("user").document(currentUser.getEmail()).collection("movie")
+                            .document("squid_game");
+
+                    Map<String, Object> user1 = new HashMap<>();
+                    user1.put("isPlay", false);
+
+                    documentReference1.set(user1, SetOptions.merge());
+
                     //user 컬렉션에 프로필 데이터 삽입
                     DocumentReference documentReference = fStore.collection("user").document(currentUser.getEmail());
 

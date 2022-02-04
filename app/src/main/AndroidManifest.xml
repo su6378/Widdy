@@ -8,11 +8,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_main"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Widdy">
+        android:theme="@style/Theme.Widdy"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".main.Filter"
             android:exported="true"
