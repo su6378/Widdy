@@ -334,6 +334,9 @@ public class Filter extends AppCompatActivity {
 
     private void initData() {
 
+       
+
+
         ArrayList<MovieItem> data = new ArrayList<>();
         MovieAdapter movieAdapter = new MovieAdapter();
 
@@ -359,7 +362,10 @@ public class Filter extends AppCompatActivity {
                     //아이템 로드
                     movieAdapter.setItems(data);
 
-
+                    if(!data.isEmpty()){
+                        //이미지 로드 완료시 터치 허용
+                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    }
                 }
             }
         });

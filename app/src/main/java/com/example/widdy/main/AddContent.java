@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -187,6 +188,10 @@ public class AddContent extends Fragment {
     }
     private void initData(){
 
+        //데이터불러올때 터치 막기
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
         ArrayList<MovieItem> data = new ArrayList<>();
         MovieAdapter movieAdapter = new MovieAdapter();
 
@@ -212,7 +217,10 @@ public class AddContent extends Fragment {
                     //아이템 로드
                     movieAdapter.setItems(data);
 
-
+                    if (!data.isEmpty()){
+                        //이미지 로드 완료시 터치 허용
+                        getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    }
                 }
             }
         });
