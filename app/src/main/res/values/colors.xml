@@ -17,6 +17,7 @@
     <color name="darkRed">#CD0000</color>
     <color name="darkGray">#323232</color>
     <color name="lightblack">#282828</color>
+    <color name="tabwhite">#F3FFFFFF</color>
     <!--<color name="red">#</color>-->
 
 </resources>

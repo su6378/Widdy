@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.widdy.R;
+import com.example.widdy.newnhot.NewnHot;
+import com.example.widdy.newnhot.NewHot;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Main extends AppCompatActivity {
@@ -24,6 +27,12 @@ public class Main extends AppCompatActivity {
     private NewnHot newnHot = new NewnHot();
     private AddContent addContent = new AddContent();
 
+    //뒤로가기버튼
+    @Override
+    public void onBackPressed() {
+        finish();
+        return;
+    }
 
 
     @Override
@@ -74,6 +83,7 @@ public class Main extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
+            Intent intent = new Intent(Main.this, NewHot.class);
 
             switch(menuItem.getItemId())
             {
@@ -81,6 +91,7 @@ public class Main extends AppCompatActivity {
                     transaction.replace(R.id.frameLayout, home).commitAllowingStateLoss();
                     break;
                 case R.id.menu_new_hot:
+                    //startActivity(intent);
                     transaction.replace(R.id.frameLayout, newnHot).commitAllowingStateLoss();
                     break;
                 case  R.id.menu_add_content:

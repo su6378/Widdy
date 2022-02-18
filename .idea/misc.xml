@@ -19,9 +19,18 @@
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/drawable/round_rectangle.xml" value="0.26979166666666665" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/drawable/round_rectangle2.xml" value="0.38229166666666664" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/drawable/selector_view.xml" value="0.38229166666666664" />
+        <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/drawable/tab_color_change.xml" value="0.378125" />
+        <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/drawable/tab_select.xml" value="0.2552083333333333" />
+        <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/drawable/tab_shape.xml" value="0.378125" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/font/font.xml" value="0.16666666666666666" />
+        <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/activity_new_hot.xml" value="0.3614583333333333" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/begin_first.xml" value="0.13645833333333332" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/begin_page.xml" value="0.22192028985507245" />
+        <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/demo_item.xml" value="0.21979166666666666" />
+        <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/demo_item_footer.xml" value="0.3619791666666667" />
+        <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/demo_subitem.xml" value="0.3619791666666667" />
+        <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/everyone_like_item.xml" value="0.2234375" />
+        <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/everyone_lile_item.xml" value="0.36614583333333334" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/filter_page.xml" value="0.23802083333333332" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/home_page.xml" value="0.20520833333333333" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/info_bottom_sheet.xml" value="0.3619791666666667" />
@@ -30,8 +39,10 @@
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/main_game.xml" value="0.2578125" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/main_home.xml" value="0.246875" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/main_newnhot.xml" value="0.346875" />
+        <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/main_newnhot_tab.xml" value="0.20208333333333334" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/main_page.xml" value="0.23854166666666668" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/movie_recycler_item.xml" value="0.36614583333333334" />
+        <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/new_n_hot_page.xml" value="0.3619791666666667" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/playing_recycler_item.xml" value="0.3619791666666667" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/profile_create_page.xml" value="0.36614583333333334" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/profile_etc_page.xml" value="0.23641304347826086" />
@@ -42,9 +53,12 @@
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/register2_page.xml" value="0.36614583333333334" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/register_page.xml" value="0.2259963768115942" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/search_page.xml" value="0.264" />
+        <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/layout/video_open_item.xml" value="0.3619791666666667" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/menu/begin_overflow.xml" value="0.13645833333333332" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/menu/home_toolbar.xml" value="0.3619791666666667" />
         <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/menu/navigation_items.xml" value="0.26145833333333335" />
+        <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/mipmap-anydpi-v26/ic_main.xml" value="0.2552083333333333" />
+        <entry key="..\:/josooyun/AndroidProject/Widdy/app/src/main/res/mipmap-anydpi-v26/ic_main_round.xml" value="0.2552083333333333" />
       </map>
     </option>
   </component>
