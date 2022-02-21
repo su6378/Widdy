@@ -65,7 +65,7 @@ public class NewnHot extends Fragment {
     private TextView tab_video_open_text,tab_everyone_like_text,tab_top10_text;
 
     //공개예정, 모두가 좋아해요, 톱 10
-    private RecyclerView video_open_recyclerview,everyone_like_recyclerview;
+    private RecyclerView video_open_recyclerview,everyone_like_recyclerview,top_10_recyclerview;
 
     @Override
     public void onResume() {
@@ -73,6 +73,7 @@ public class NewnHot extends Fragment {
         //데이터 초기화
         getOpen();
         getLike();
+        getTop10();
 
     }
 
@@ -165,6 +166,10 @@ public class NewnHot extends Fragment {
 
 
         //톱 10
+        top_10_recyclerview = view.findViewById(R.id.top_10_recyclerview);
+        LinearLayoutManager layoutManager3 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        top_10_recyclerview.setLayoutManager(layoutManager3);
+
 
         return view;
     }
@@ -258,6 +263,58 @@ public class NewnHot extends Fragment {
 
                     //아이템 로드
                     everyoneLikeAdapter.setItems(data);
+
+
+
+                    if (!data.isEmpty()){
+                        //이미지 로드 완료시 터치 허용
+                        getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    }
+                }
+            }
+        });
+
+    }
+
+    //톱 10 불러오기
+    private void getTop10(){
+
+        //데이터불러올때 터치 막기
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+        ArrayList<Top10Item> data = new ArrayList<>();
+        Top10Adapter top10Adapter = new Top10Adapter();
+
+        fStore.collection("top10").orderBy("order", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String id = document.getId();
+
+                        title_id = document.getId();
+
+                        String title = document.getString("title");
+                        String subTitle = document.getString("subTitle");
+                        String detail = document.getString("detail");
+                        String tag = document.getString("tag");
+                        String ranking = String.valueOf(document.getLong("order"));
+
+                        data.add(new Top10Item(id,title,subTitle,detail,tag,ranking));
+
+                        Log.d("테스트", String.valueOf(document.getData()));
+
+
+
+                    }
+
+                    top_10_recyclerview.setAdapter(top10Adapter);
+                    top_10_recyclerview.setClickable(false);
+
+
+                    //아이템 로드
+                    top10Adapter.setItems(data);
 
 
 

@@ -7,38 +7,27 @@
     android:paddingBottom="10dp">
 
     <TextView
-        android:id="@+id/video_open_month"
+        android:id="@+id/top10_ranking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:text="2월"
-        android:textColor="@color/lightgray"
-        android:textSize="14sp"
+        android:text="1"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:layout_marginLeft="15dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/video_open_day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:text="25일"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="@id/video_open_month"
-        app:layout_constraintTop_toBottomOf="@id/video_open_month" />
-
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/video_open_cardView"
+        android:id="@+id/top10_cardView"
         android:layout_width="0dp"
         android:layout_height="180dp"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
         android:background="@color/black"
-        app:layout_constraintLeft_toRightOf="@id/video_open_day"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/top10_ranking"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,7 +36,7 @@
             android:background="@color/black">
 
             <ProgressBar
-                android:id="@+id/vo_movie_progressbar"
+                android:id="@+id/top10_movie_progressbar"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:indeterminateTint="@color/white"
@@ -58,12 +47,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/vo_movie_image"
+                android:id="@+id/top10_movie_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/vo_playBtn"
+                android:id="@+id/top10_playBtn"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/ic_playing"
@@ -75,7 +64,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/vo_movie_layout"
+                android:id="@+id/top10_movie_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackground"
@@ -88,7 +77,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
-        android:id="@+id/video_movie_title"
+        android:id="@+id/top10_title"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
@@ -98,61 +87,75 @@
         android:text="제목"
         android:textColor="@color/white"
         android:textSize="23sp"
-        app:layout_constraintLeft_toLeftOf="@id/video_open_cardView"
-        app:layout_constraintTop_toBottomOf="@id/video_open_cardView" />
+        app:layout_constraintLeft_toLeftOf="@id/top10_cardView"
+        app:layout_constraintTop_toBottomOf="@id/top10_cardView" />
 
     <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginLeft="30dp"
+        android:id="@+id/top10_share"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginTop="5dp"
-        android:src="@drawable/ic_bell"
-        app:layout_constraintLeft_toRightOf="@id/video_movie_title"
-        app:layout_constraintTop_toTopOf="@id/video_movie_title" />
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/ic_share"
+        app:layout_constraintLeft_toRightOf="@id/top10_title"
+        app:layout_constraintTop_toTopOf="@id/top10_title"
+        app:tint="@color/white" />
 
     <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:id="@+id/top10_add"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="30dp"
-        android:src="@drawable/ic_info"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/video_movie_title"
+        android:layout_marginLeft="25dp"
+        android:src="@drawable/ic_add"
+        app:layout_constraintLeft_toRightOf="@id/top10_share"
+        app:layout_constraintTop_toTopOf="@id/top10_title"
+        app:tint="@color/white" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:src="@drawable/ic_play"
+        app:layout_constraintRight_toRightOf="@id/top10_cardView"
+        app:layout_constraintTop_toTopOf="@id/top10_title"
         app:tint="@color/white" />
 
     <TextView
-        android:id="@+id/video_open_title"
+        android:id="@+id/top10_subTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="시즌 1: 2월 25일 공개"
+        android:text="매주 목요일 새로운 에피소드 공개"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="@id/video_movie_title"
-        app:layout_constraintTop_toBottomOf="@id/video_movie_title" />
+        app:layout_constraintLeft_toLeftOf="@id/top10_title"
+        app:layout_constraintTop_toBottomOf="@id/top10_title" />
 
     <TextView
-        android:id="@+id/video_open_detail_text"
+        android:id="@+id/top10_detail_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:paddingRight="10dp"
-        android:text="지방법원 소년부의 엄정한 판사. 복잡다단한 사건들을 다루며, 소년범에 대한 반감, 정의와 형벌에 대한 굳건한 신념 사이에서 균형을 잡아간다."
+        android:text="항상 서로의 곁을 지키는 절친 3인방. 마흔을 코앞에 둔 그녀들이 삶과 사랑, 상실을 경험하며 함께 걸어간다."
         android:textColor="@color/gray"
-        app:layout_constraintLeft_toLeftOf="@id/video_open_title"
+        app:layout_constraintLeft_toLeftOf="@id/top10_subTitle"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/video_open_title" />
+        app:layout_constraintTop_toBottomOf="@id/top10_subTitle" />
 
     <TextView
-        android:id="@+id/video_open_tag"
+        android:id="@+id/top10_open_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="드라마 장르 • 서서히 조여오는 긴장감 • 법정 • 사회 이슈"
+        android:text="진심 어린   •  감정을 파고드는  •  로맨틱  •  드라마 장르  •  멀티캐스팅"
         android:textColor="@color/white"
         android:textSize="10sp"
-        app:layout_constraintLeft_toLeftOf="@id/video_open_title"
-        app:layout_constraintTop_toBottomOf="@id/video_open_detail_text" />
+        app:layout_constraintLeft_toLeftOf="@id/top10_subTitle"
+        app:layout_constraintTop_toBottomOf="@id/top10_detail_text" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
