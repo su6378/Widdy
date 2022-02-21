@@ -15,10 +15,6 @@
         android:theme="@style/Theme.Widdy"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".newnhot.NewHot"
-            android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
             android:name=".main.Filter"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />

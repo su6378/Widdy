@@ -35,7 +35,6 @@ public class Top10Adapter extends RecyclerView.Adapter<Top10Adapter.Top10ViewHol
     public Top10Adapter.Top10ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.top10_item, parent, false);
         Top10ViewHolder viewHolder = new Top10ViewHolder(itemView);
-
         return viewHolder;
     }
 
@@ -77,7 +76,6 @@ public class Top10Adapter extends RecyclerView.Adapter<Top10Adapter.Top10ViewHol
                         viewHolder.top10_movie_progressbar.setVisibility(View.INVISIBLE);
                         viewHolder.top10_movie_image.setVisibility(View.VISIBLE);
                         viewHolder.top10_playBtn.setVisibility(View.VISIBLE);
-                        Log.d("테스트","성공");
                         return false;
                     }
                 }).into(viewHolder.top10_movie_image);

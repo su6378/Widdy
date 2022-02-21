@@ -6,10 +6,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -17,7 +19,7 @@ import android.view.WindowManager;
 
 import com.example.widdy.R;
 import com.example.widdy.newnhot.NewnHot;
-import com.example.widdy.newnhot.NewHot;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Main extends AppCompatActivity {
@@ -63,8 +65,20 @@ public class Main extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
 
+        //뱃지 생성
+        BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(R.id.menu_new_hot);
+        badgeDrawable.setVisible(true);
+        badgeDrawable.setVerticalOffset(dpToPx(Main.this,3));
+        badgeDrawable.setNumber(5);
+        badgeDrawable.setBackgroundColor(getResources().getColor(R.color.darkRed));
+        badgeDrawable.setBadgeTextColor(getResources().getColor(R.color.white));
 
+    }
 
+    //dp를 px로
+    public static int dpToPx(Context context,int dp){
+        Resources resources = context.getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,dp,resources.getDisplayMetrics()));
     }
 
 
@@ -83,7 +97,6 @@ public class Main extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-            Intent intent = new Intent(Main.this, NewHot.class);
 
             switch(menuItem.getItemId())
             {

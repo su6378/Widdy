@@ -30,7 +30,6 @@ import java.util.ArrayList;
 public class EveryoneLikeAdapter extends RecyclerView.Adapter<EveryoneLikeAdapter.EveryoneLikeViewHolder> {
 
     private ArrayList<EveryoneLikeItem> items = new ArrayList<>();
-
     @NonNull
     @Override
     public EveryoneLikeAdapter.EveryoneLikeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -77,7 +76,6 @@ public class EveryoneLikeAdapter extends RecyclerView.Adapter<EveryoneLikeAdapte
                         viewHolder.el_movie_progressbar.setVisibility(View.INVISIBLE);
                         viewHolder.el_movie_image.setVisibility(View.VISIBLE);
                         viewHolder.el_playBtn.setVisibility(View.VISIBLE);
-                        Log.d("테스트","성공");
                         return false;
                     }
                 }).into(viewHolder.el_movie_image);
